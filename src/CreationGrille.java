@@ -30,7 +30,12 @@ public class CreationGrille {
 				for(int gy =cpt1; gy < cpt1 + List.nextInt(7); gy++)
 					for(int gx = cpt2; gx < cpt2 + List.nextInt(7); gx++) // 
 						{
+<<<<<<< HEAD
 						grille.add(new Nombre(List.nextInt(10)));
+=======
+			esgegjnselkgjlsekjglksjegl
+						
+>>>>>>> 53420273b706a6cc090b942fab65d58d5d42bc57
 					}
 				}
 			}
