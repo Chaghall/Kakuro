@@ -30,7 +30,8 @@ public class CreationGrille {
 				for(int gy =cpt1; gy < cpt1 + List.nextInt(7); gy++)
 					for(int gx = cpt2; gx < cpt2 + List.nextInt(7); gx++) // 
 						{
-						grille.add(null);
+			esgegjnselkgjlsekjglksjegl
+						
 					}
 				}
 			}
