@@ -12,5 +12,5 @@ Le  Kakuro est un jeu japonais dont le but est de remplir les cases  d’une gri
 mais la somme des chiffres écrits dans une ligne ou une colonne doit être égale à la valeur indiquée en face de celle-ci.
 
 Le programme devra donc pouvoir générer une grille dont le niveau de difficulté pourra être ajustée au choix
-de l’utilisateur, la vérifiée une fois remplie par l’utilisateur, et être capable de la résoudre.
+de l’utilisateur, la vérifier une fois remplie par l’utilisateur, et être capable de la résoudre.
 En outre, le programme devra être capable de sauvegarder des parties en cours et de les charger.
