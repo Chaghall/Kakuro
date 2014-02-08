@@ -2,8 +2,8 @@ Kakuro
 ======
 
 Projet Java Promo 2017
-Réaliser par Laurent CASSAGNE et Simon GREVET
-Réaliser sous Eclipse Kepler avec jse 1.6
+Réaliser par Laurent CASSAGNE et Simon GREVET.
+Réaliser sous Eclipse Kepler avec jse 1.6.
 
 Le projet a pour but de créer un programme permettant la résolution et la génération de grille de Kakuro
 à remplir par l’utilisateur.
