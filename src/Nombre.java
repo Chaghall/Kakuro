@@ -1,7 +1,7 @@
 
 public class Nombre {
 
-	public Nombre()
+	public Nombre(int l)
 	{
 		
 	}
