@@ -15,33 +15,9 @@ public class CreationGrille {
 		Random List = new Random(seed);
 		//FormeGrille tab = new FormeGrille(x, y, seed);		// Tableau de "forme" de grille
 		//boolean tab[][] = {{true, true, false, true, true},{true, true, true, true, true},{false, true, true, true, false},{true, true, true, true, true},{true, true, false, true, true}};
-		boolean[][] tab = FormeGrille(x, y, seed);
-		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
+		boolean[][] forme = formeGrille(x, y, List);
+		int[][] valeur = remplissageGrille(x, y, List, forme);
 
-
-		for(int i=0;i<tab.length; i++)		// Remplissage des valeurs de la grille
-			for(int j = 0 ; j< tab[i].length; j++)
-				if (tab[i][j]){
-					int nb = List.nextInt(9) + 1;
-					boolean test = false;
-					while(!test){
-						boolean testI = true, testJ = true;
-						for(int ii=i-1; ii>=0 && grill[ii][j]!=0; ii--)		// Test de la présence ou non du chiffre actuel sur la ligne
-							if(grill[ii][j]==nb)
-								testI = false;
-						for(int jj=j-1; jj>=0 && grill[i][jj]!=0; jj--)		// Test de la présence ou non du chiffre actuel sur la colonne
-							if(grill[i][jj]==nb)
-								testJ = false;
-						if (testI && testJ){
-							test = true;		// Si les tests ont réussi, on place le chiffre actuel dans la case en cours
-							grill[i][j] = nb;		// On remplit de 1 à 9
-						}
-						else
-							nb = List.nextInt(9) + 1;	// Autrement, on change de valeur
-					}
-				}
-
-		affichTab(grill);
 	}	
 
 	/**
@@ -51,10 +27,9 @@ public class CreationGrille {
 	 * @param seed
 	 * @return
 	 */
-	private boolean[][] FormeGrille(int x, int y, long seed) {
+	private boolean[][] formeGrille(int x, int y, Random List) {
 
 		boolean frmGrll[][] = new boolean[x][y];
-		Random List = new Random(seed);
 
 		for(int i = 0; i < frmGrll.length ; i++){			//Création du tableau de booléens
 			for(int j = 0; j < frmGrll[i].length ; j++){
@@ -105,6 +80,43 @@ public class CreationGrille {
 		return frmGrll;
 	}
 
+	/**
+	 * Génération d'un tableau de valeurs sans bordures
+	 * @param x
+	 * @param y
+	 * @param seed
+	 * @param tab
+	 * @return
+	 */
+	private int[][] remplissageGrille(int x, int y, Random List, boolean[][] tab) {
+		
+		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
+		
+		for(int i=0;i<tab.length; i++)		// Remplissage des valeurs de la grille
+			for(int j = 0 ; j< tab[i].length; j++)
+				if (tab[i][j]){
+					int nb = List.nextInt(9) + 1;
+					boolean test = false;
+					while(!test){
+						boolean testI = true, testJ = true;
+						for(int ii=i-1; ii>=0 && grill[ii][j]!=0; ii--)		// Test de la présence ou non du chiffre actuel sur la ligne
+							if(grill[ii][j]==nb)
+								testI = false;
+						for(int jj=j-1; jj>=0 && grill[i][jj]!=0; jj--)		// Test de la présence ou non du chiffre actuel sur la colonne
+							if(grill[i][jj]==nb)
+								testJ = false;
+						if (testI && testJ){
+							test = true;		// Si les tests ont réussi, on place le chiffre actuel dans la case en cours
+							grill[i][j] = nb;		// On remplit de 1 à 9
+						}
+						else
+							nb = List.nextInt(9) + 1;	// Autrement, on change de valeur
+					}
+				}
+
+		affichTab(grill);
+		return grill;
+	}
 
 	private void affichTab(int tab[][]){
 		for (int i=0;i<tab.length; i++){
