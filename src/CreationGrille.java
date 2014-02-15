@@ -1,6 +1,6 @@
 import java.util.Random;
 
-
+@SuppressWarnings("unused")
 public class CreationGrille {
 
 	public static void main(String[] args){
@@ -17,67 +17,31 @@ public class CreationGrille {
 		//boolean tab[][] = {{true, true, false, true, true},{true, true, true, true, true},{false, true, true, true, false},{true, true, true, true, true},{true, true, false, true, true}};
 		boolean[][] forme = formeGrille(x, y, List);
 		int[][] valeur = remplissageGrille(x, y, List, forme);
+		affichTab(valeur);
 
-	}	
+	}
+
 
 	/**
-	 * Génération d'un tableau de forme de grille
+	 * Génération d'un tableau de forme de grille par pose de blocs de 2x2
 	 * @param x
 	 * @param y
-	 * @param seed
+	 * @param List
 	 * @return
 	 */
-	private boolean[][] formeGrille(int x, int y, Random List) {
+	private boolean[][] formeGrille(int x, int y, Random List){
+		boolean frmGrill[][] = new boolean[x][y];
 
-		boolean frmGrll[][] = new boolean[x][y];
+		for(int c = 0; c < x * y / 4 ; c++){
+			int val = List.nextInt((x-1)*(y-1));
+			int j = val % (y-1);
+			int i = val / (x-1);
 
-		for(int i = 0; i < frmGrll.length ; i++){			//Création du tableau de booléens
-			for(int j = 0; j < frmGrll[i].length ; j++){
-				frmGrll[i][j] = List.nextBoolean();			// Aléatoire, bien sûr
-			}
+			for(int i1 = 0; i1 < 2; i1++)
+				for(int j1 = 0; j1 < 2; j1++)
+					frmGrill[i1+i][j1+j] = true;
 		}
-
-		//affichTab(frmGrll);
-
-		boolean frmGrllTest[][] = new boolean[x+2][y+2];
-
-		for(int i = 0; i < frmGrll.length ; i++){			// Création d'un second tableau sur lequel on effectue les changements pour obtenir les suites de nombres > 2.
-			for(int j = 0; j < frmGrll[i].length ; j++){
-				frmGrllTest[i+1][j+1] = frmGrll[i][j];
-			}
-		}
-		if(frmGrllTest[1][1]){		// Optimisation possible, C'est pour ne pas avoir de changements si la première case est vraie
-			frmGrllTest[0][1] = true;
-			frmGrllTest[1][0] = true;
-		}
-
-
-		for(int i = 1; i < frmGrllTest.length-1 ; i++){		// Création des listes de longueur de sommes
-			for(int j = 1; j < frmGrllTest[i].length-1 ; j++){
-				int n = 0;
-				if(frmGrllTest[i-1][j])
-					n += 1;
-				if(frmGrllTest[i+1][j])
-					n += 1;
-				if(frmGrllTest[i][j-1])
-					n += 1;
-				if(frmGrllTest[i][j+1])
-					n += 1;
-				if (n>1)
-					frmGrllTest[i][j] = true;
-				else
-					frmGrllTest[i][j] = false;
-			}
-		}
-		//affichTab(frmGrllTest);
-
-		for(int i = 0; i < frmGrll.length ; i++){			// Et on remet dans le premier tableau
-			for(int j = 0; j < frmGrll[i].length ; j++){
-				frmGrll[i][j] = frmGrllTest[i+1][j+1];
-			}
-		}
-		//affichTab(frmGrll);
-		return frmGrll;
+		return frmGrill;
 	}
 
 	/**
@@ -89,9 +53,9 @@ public class CreationGrille {
 	 * @return
 	 */
 	private int[][] remplissageGrille(int x, int y, Random List, boolean[][] tab) {
-		
+
 		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
-		
+
 		for(int i=0;i<tab.length; i++)		// Remplissage des valeurs de la grille
 			for(int j = 0 ; j< tab[i].length; j++)
 				if (tab[i][j]){
@@ -114,7 +78,7 @@ public class CreationGrille {
 					}
 				}
 
-		affichTab(grill);
+		//affichTab(grill);
 		return grill;
 	}
 
