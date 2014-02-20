@@ -5,6 +5,7 @@ public class CreationGrille {
 
 	public static void main(String[] args){
 		new CreationGrille();
+		
 	}
 
 
@@ -40,8 +41,9 @@ public class CreationGrille {
 							nb = List.nextInt(9) + 1;	// Autrement, on change de valeur
 					}
 				}
-
 		affichTab(grill);
+		CopieTab(grill);
+		
 	}	
 
 	/**
@@ -56,8 +58,10 @@ public class CreationGrille {
 		boolean frmGrll[][] = new boolean[x][y];
 		Random List = new Random(seed);
 
-		for(int i = 0; i < frmGrll.length ; i++){			//Création du tableau de booléens
-			for(int j = 0; j < frmGrll[i].length ; j++){
+		for(int i = 0; i < frmGrll.length ; i++)
+		{			//Création du tableau de booléens
+			for(int j = 0; j < frmGrll[i].length ; j++)
+			{
 				frmGrll[i][j] = List.nextBoolean();			// Aléatoire, bien sûr
 			}
 		}
@@ -113,12 +117,68 @@ public class CreationGrille {
 			System.out.println("|");
 		}
 	}
-	private void affichTab(boolean tab[][]){
+	private void affichTab(boolean tab[][])
+	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)
 				System.out.printf("| %6s", tab[i][j]);
 			System.out.println("|");
 		}
 	}
+	private void CalcSommeY(int tabSommes[][])
+	{
+		int somme = 0;
+		for(int i =0; i<tabSommes.length; i++)   // on parcours le tableau
+		{
+			for(int j =0; j<tabSommes.length; j++)
+			{
+				if(tabSommes[i][j]==0)            //si on trouve un 0 
+				{
+					for(int j2 = j+1; tabSommes[i][j] == 0 || j == tabSommes.length; j2++ )// on effectue tant que on ne rtombe pas sur un 0 ou que l'on est à la fin du tableau
+					{
+						 somme = tabSommes[i][j2];
+					}
+					tabSommes[i][j] = somme;
+					
+				}
+			}
+		}
+	}
+	
+	private void CalcSommeX(int tabSommes[][])
+	{
+		int somme = 0;
+		for(int i =0; i<tabSommes.length; i++)   // on parcours le tableau
+		{
+			for(int j =0; j<tabSommes.length; j++)
+			{
+				if(tabSommes[i][j]==0)            //si on trouve un 0 
+				{
+					for(int i2 = i+1; tabSommes[i][j] == 0 || i == tabSommes.length; i2++ )// on effectue tant que on ne rtombe pas sur un 0 ou que l'on est à la fin du tableau
+					{
+						 somme = tabSommes[i2][j];
+					}
+					tabSommes[i][j] = somme;
+					
+				}
+			}
+		}
+	}
+	
+	private void CopieTab(int grill[][])
+	{
+		int x=0;
+		int y=0;
+		int tabSommes[][] = new int[x][y];    //simple copie du tableau de int
+		for(int i = 0; i<tabSommes.length; i++)
+		{
+			for(int j=0; j<tabSommes[i].length; j++ )
+			{
+				tabSommes[i][j] = grill[i][j];
+			}
+		}
+		affichTab(tabSommes);
+	}
+	
 }
 
