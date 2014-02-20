@@ -78,9 +78,9 @@ public class CreationGrille {
 							nb = List.nextInt(9) + 1;	// Autrement, on change de valeur
 					}
 				}
-<<<<<<< HEAD
 		affichTab(grill);
 		CopieTab(grill);
+		return grill;
 		
 	}	
 
@@ -145,11 +145,6 @@ public class CreationGrille {
 		}
 		//affichTab(frmGrll);
 		return frmGrll;
-=======
-
-		//affichTab(grill);
-		return grill;
->>>>>>> e9e92ef9497716366618ce71960a21c1891d2005
 	}
 
 	private void affichTab(int tab[][]){
