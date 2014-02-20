@@ -1,6 +1,6 @@
 import java.util.Random;
 
-
+@SuppressWarnings("unused")
 public class CreationGrille {
 
 	public static void main(String[] args){
@@ -16,9 +16,46 @@ public class CreationGrille {
 		Random List = new Random(seed);
 		//FormeGrille tab = new FormeGrille(x, y, seed);		// Tableau de "forme" de grille
 		//boolean tab[][] = {{true, true, false, true, true},{true, true, true, true, true},{false, true, true, true, false},{true, true, true, true, true},{true, true, false, true, true}};
-		boolean[][] tab = FormeGrille(x, y, seed);
-		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
+		boolean[][] forme = formeGrille(x, y, List);
+		int[][] valeur = remplissageGrille(x, y, List, forme);
+		affichTab(valeur);
 
+	}
+
+
+	/**
+	 * Génération d'un tableau de forme de grille par pose de blocs de 2x2
+	 * @param x
+	 * @param y
+	 * @param List
+	 * @return
+	 */
+	private boolean[][] formeGrille(int x, int y, Random List){
+		boolean frmGrill[][] = new boolean[x][y];
+
+		for(int c = 0; c < x * y / 4 ; c++){
+			int val = List.nextInt((x-1)*(y-1));
+			int j = val % (y-1);
+			int i = val / (x-1);
+
+			for(int i1 = 0; i1 < 2; i1++)
+				for(int j1 = 0; j1 < 2; j1++)
+					frmGrill[i1+i][j1+j] = true;
+		}
+		return frmGrill;
+	}
+
+	/**
+	 * Génération d'un tableau de valeurs sans bordures
+	 * @param x
+	 * @param y
+	 * @param seed
+	 * @param tab
+	 * @return
+	 */
+	private int[][] remplissageGrille(int x, int y, Random List, boolean[][] tab) {
+
+		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
 
 		for(int i=0;i<tab.length; i++)		// Remplissage des valeurs de la grille
 			for(int j = 0 ; j< tab[i].length; j++)
@@ -41,6 +78,7 @@ public class CreationGrille {
 							nb = List.nextInt(9) + 1;	// Autrement, on change de valeur
 					}
 				}
+<<<<<<< HEAD
 		affichTab(grill);
 		CopieTab(grill);
 		
@@ -107,8 +145,12 @@ public class CreationGrille {
 		}
 		//affichTab(frmGrll);
 		return frmGrll;
-	}
+=======
 
+		//affichTab(grill);
+		return grill;
+>>>>>>> e9e92ef9497716366618ce71960a21c1891d2005
+	}
 
 	private void affichTab(int tab[][]){
 		for (int i=0;i<tab.length; i++){
