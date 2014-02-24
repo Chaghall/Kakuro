@@ -13,8 +13,6 @@ public class CreationGrille {
 		int x = 5, y = 5;
 		long seed = 42;		// Seed du tableau
 		Random List = new Random(seed);
-		//FormeGrille tab = new FormeGrille(x, y, seed);		// Tableau de "forme" de grille
-		//boolean tab[][] = {{true, true, false, true, true},{true, true, true, true, true},{false, true, true, true, false},{true, true, true, true, true},{true, true, false, true, true}};
 		boolean[][] forme = formeGrille(x, y, List);
 		int[][] valeur = remplissageGrille(x, y, List, forme);
 		affichTab(valeur);
@@ -31,12 +29,18 @@ public class CreationGrille {
 	 */
 	private boolean[][] formeGrille(int x, int y, Random List){
 		boolean frmGrill[][] = new boolean[x][y];
-
-		for(int c = 0; c < x * y / 4 ; c++){
+		/* 
+		 * On va générer une suite de nombre qui serot convertis en coordonnées pour la poses de blocs
+		 * La même valeur peut retomber plusieurs fois
+		 */
+		for(int c = 0; c < x * y / 4 ; c++){		
 			int val = List.nextInt((x-1)*(y-1));
 			int j = val % (y-1);
 			int i = val / (x-1);
-
+			
+			/*
+			 * On va maintenant poser un bloc de 2x2 sur la coordonnée en question
+			 */
 			for(int i1 = 0; i1 < 2; i1++)
 				for(int j1 = 0; j1 < 2; j1++)
 					frmGrill[i1+i][j1+j] = true;
