@@ -39,5 +39,21 @@ public class CaseActive {
 	}
 	
 	
+	public String toString()
+	{
+		if (n != 0)
+			return String.format("  %-3d", n);
+		else
+			if (sX != 0)
+				if (sY != 0)
+					return String.format("%2d\\%2d", sY, sX);
+				else
+					return String.format("%2d\\  ", sX);
+			else
+				if (sY != 0)
+					return String.format("  \\%2d", sY);
+				else
+					return String.format("  \\  ");
+	}
 
 }
