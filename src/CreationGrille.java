@@ -3,6 +3,11 @@ import java.util.Random;
 
 public class CreationGrille {
 
+	public int x = 5, y = 5;
+	public long seed = 42;		// Seed du tableau
+	public CaseActive[][] grille = new CaseActive[x][y];
+
+
 	public static void main(String[] args){
 		new CreationGrille();
 
@@ -11,19 +16,27 @@ public class CreationGrille {
 
 	public CreationGrille()
 	{
-		int x = 5, y = 5;
-		long seed = 42;		// Seed du tableau
 		Random List = new Random(seed);
 		boolean[][] forme = formeGrille(x, y, List);
 		int[][] valeur = remplissageGrille(x, y, List, forme);
-		affichTab(valeur);
-		
-		
-		
+
 		for (int i = 0; i < valeur.length; i++)
-			for (int j = 0; i < valeur[i].length; i++)
+			for (int j = 0; j < valeur[i].length; j++)
 			{
-				
+				if (valeur[i][j] != 0)
+					grille[i][j] = new CaseActive(valeur[i][j]);
+				if (valeur[i][j] == 0){
+					int SommeX = CalcSommeX(valeur, i, j);
+					int SommeY = CalcSommeY(valeur, i, j);
+
+					if (SommeX == 0)
+						grille[i][j] = new CaseActive(SommeY, false);
+					if (SommeY == 0)
+						grille[i][j] = new CaseActive(SommeX, true);
+					else
+						grille[i][j] = new CaseActive(SommeX, SommeY);
+				}
+
 			}
 	}
 
@@ -93,11 +106,48 @@ public class CreationGrille {
 	}	
 
 
+	/**
+	 * 
+	 * @param tabSommes
+	 * @param i
+	 * @param j
+	 * @return Valeur de la somme en dessous
+	 */
+	private int CalcSommeY(int tabSommes[][], int i, int j)
+	{
+		int somme = 0;			
+		// On effectue tant que on ne retombe pas sur un 0 ou que l'on est à la fin du tableau
+		for(int j2 = j+1; tabSommes[i][j] != 0 && j2 != tabSommes.length; j2++ )
+			somme = tabSommes[i][j2];
+
+		return somme;
+	}
+
+	/**
+	 * 
+	 * @param tabSommes
+	 * @param i
+	 * @param j
+	 * @return Valeur de la somme a droite
+	 */
+	private int CalcSommeX(int tabSommes[][], int i, int j)
+	{
+		int somme = 0;
+
+		// On effectue tant que on ne retombe pas sur un 0 ou que l'on est à la fin du tableau
+		for(int i2 = i+1; tabSommes[i][j] != 0 && i != tabSommes.length; i2++ )
+			somme = tabSommes[i2][j];
+
+		return somme;
+	}
+
+
+
 	@SuppressWarnings("unused")
 	private void affichTab(int tab[][]){
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)
-				System.out.print("|"+tab[i][j]);
+				System.out.printf("| %6s", tab[i][j]);
 			System.out.println("|");
 		}
 	}
@@ -111,49 +161,6 @@ public class CreationGrille {
 				System.out.printf("| %6s", tab[i][j]);
 			System.out.println("|");
 		}
-	}
-
-
-
-	private void CalcSommeY(int tabSommes[][])
-	{
-		int somme = 0;
-		for(int i =0; i<tabSommes.length; i++)   // on parcours le tableau
-			for(int j =0; j<tabSommes.length; j++)
-				if(tabSommes[i][j]==0)            //si on trouve un 0
-				{
-					//On effectue tant que on ne retombe pas sur un 0 ou que l'on est à la fin du tableau
-					for(int j2 = j+1; tabSommes[i][j] != 0 && j != tabSommes.length; j2++ )
-						somme = tabSommes[i][j2];
-					tabSommes[i][j] = somme;
-				}
-	}
-
-	private void CalcSommeX(int tabSommes[][])
-	{
-		int somme = 0;
-		for(int i =0; i<tabSommes.length; i++)   // on parcours le tableau
-			for(int j =0; j<tabSommes.length; j++)
-				if(tabSommes[i][j]==0)            //si on trouve un 0 
-				{
-					//On effectue tant que on ne retombe pas sur un 0 ou que l'on est à la fin du tableau
-					for(int i2 = i+1; tabSommes[i][j] != 0 && i != tabSommes.length; i2++ )
-						somme = tabSommes[i2][j];
-					tabSommes[i][j] = somme;
-				}
-	}
-
-	private void CopieTab(int grill[][])
-	{
-		int x=0;
-		int y=0;
-		int tabSommes[][] = new int[x][y];    //simple copie du tableau de int
-		for(int i = 0; i<tabSommes.length; i++)
-		{
-			for(int j=0; j<tabSommes[i].length; j++ )
-				tabSommes[i][j] = grill[i][j];
-		}
-		affichTab(tabSommes);
 	}
 
 }

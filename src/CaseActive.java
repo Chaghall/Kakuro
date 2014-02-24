@@ -15,12 +15,12 @@ public class CaseActive {
 	
 	/**
 	 * 
-	 * @param S1 indice de Somme
-	 * @param or1 orientation de l'indice de Somme
+	 * @param S indice de Somme
+	 * @param or orientation de l'indice de Somme
 	 */
-	public CaseActive(int S, boolean or1)
+	public CaseActive(int S, boolean or)
 	{
-		if(or1)
+		if(or)
 			this.sX = S;
 		else
 			this.sY = S;
@@ -29,13 +29,13 @@ public class CaseActive {
 
 	/**
 	 * 
-	 * @param S1 indice de Somme vertical
-	 * @param S2 indice de Somme horizontal
+	 * @param sX indice de Somme horizontal
+	 * @param sY indice de Somme vertical
 	 */
-	public CaseActive(int S1, int S2)
+	public CaseActive(int sX, int sY)
 	{
-		this.sX = S1;
-		this.sY = S2;
+		this.sX = sX;
+		this.sY = sY;
 	}
 	
 	
