@@ -86,6 +86,72 @@ public class CreationGrille {
 		CopieTab(grill);
 		return grill;
 		
+<<<<<<< HEAD
+=======
+	}	
+
+	/**
+	 * Génération d'un tableau de forme de grille
+	 * @param x
+	 * @param y
+	 * @param seed
+	 * @return
+	 */
+	private boolean[][] FormeGrille(int x, int y, long seed) {
+
+		boolean frmGrll[][] = new boolean[x][y];
+		Random List = new Random(seed);
+
+		for(int i = 0; i < frmGrll.length ; i++)
+		{			//Création du tableau de booléens
+			for(int j = 0; j < frmGrll[i].length ; j++)
+			{
+				frmGrll[i][j] = List.nextBoolean();			// Aléatoire, bien sûr
+			}
+		}
+
+		//affichTab(frmGrll);
+
+		boolean frmGrllTest[][] = new boolean[x+2][y+2];
+
+		for(int i = 0; i < frmGrll.length ; i++){			// Création d'un second tableau sur lequel on effectue les changements pour obtenir les suites de nombres > 2.
+			for(int j = 0; j < frmGrll[i].length ; j++){
+				frmGrllTest[i+1][j+1] = frmGrll[i][j];
+			}
+		}
+		if(frmGrllTest[1][1]){		// Optimisation possible, C'est pour ne pas avoir de changements si la première case est vraie
+			frmGrllTest[0][1] = true;
+			frmGrllTest[1][0] = true;
+		}
+
+
+		for(int i = 1; i < frmGrllTest.length-1 ; i++){		// Création des listes de longueur de sommes
+			for(int j = 1; j < frmGrllTest[i].length-1 ; j++){
+				int n = 0;
+				if(frmGrllTest[i-1][j])
+					n += 1;
+				if(frmGrllTest[i+1][j])
+					n += 1;
+				if(frmGrllTest[i][j-1])
+					n += 1;
+				if(frmGrllTest[i][j+1])
+					n += 1;
+				if (n>1)
+					frmGrllTest[i][j] = true;
+				else
+					frmGrllTest[i][j] = false;
+			}
+		}
+		//affichTab(frmGrllTest);
+
+		for(int i = 0; i < frmGrll.length ; i++){			// Et on remet dans le premier tableau
+			for(int j = 0; j < frmGrll[i].length ; j++){
+				frmGrll[i][j] = frmGrllTest[i+1][j+1];
+			}
+		}
+		//affichTab(frmGrll);
+		return frmGrll;
+>>>>>>> dd32b6bfe8838b6fe730b298a71ab6edc4645db0
 	}
 	
 
@@ -96,8 +162,11 @@ public class CreationGrille {
 			System.out.println("|");
 		}
 	}
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> dd32b6bfe8838b6fe730b298a71ab6edc4645db0
 	private void affichTab(boolean tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
