@@ -1,4 +1,4 @@
-public class CaseActive {
+public class Case {
 
 	private int n;
 	private int sX;
@@ -8,7 +8,7 @@ public class CaseActive {
 	 * 
 	 * @param n valeur d'une case
 	 */
-	public CaseActive(int n)
+	public Case(int n)
 	{
 		this.n = n;
 	}
@@ -16,9 +16,9 @@ public class CaseActive {
 	/**
 	 * 
 	 * @param S indice de Somme
-	 * @param or orientation de l'indice de Somme
+	 * @param or orientation de l'indice de Somme, s'il est vrai, c'est un indice en ligne, sinon, c'est un indice de colonne
 	 */
-	public CaseActive(int S, boolean or)
+	public Case(int S, boolean or)
 	{
 		if(or)
 			this.sX = S;
@@ -32,7 +32,7 @@ public class CaseActive {
 	 * @param sX indice de Somme horizontal
 	 * @param sY indice de Somme vertical
 	 */
-	public CaseActive(int sX, int sY)
+	public Case(int sX, int sY)
 	{
 		this.sX = sX;
 		this.sY = sY;

@@ -1,19 +1,19 @@
 import java.util.Random;
 
 
-public class CreationGrille {
+public class GrilleCible {
 
 	public int x = 6, y = 6;
 	public long seed = 42;		// Seed du tableau
-	public CaseActive[][] grille = new CaseActive[x][y];
+	public Case[][] grille = new Case[x][y];
 
 
 	public static void main(String[] args){
-		new CreationGrille();
+		new GrilleCible();
 	}
 
 
-	public CreationGrille()
+	public GrilleCible()
 	{
 		Random List = new Random(seed);
 
@@ -24,17 +24,17 @@ public class CreationGrille {
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					grille[i][j] = new CaseActive(valeur[i][j]);
+					grille[i][j] = new Case(valeur[i][j]);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						grille[i][j] = new CaseActive(SommeY, false);
+						grille[i][j] = new Case(SommeY, false);
 					if (SommeY == 0)
-						grille[i][j] = new CaseActive(SommeX, true);
+						grille[i][j] = new Case(SommeX, true);
 					else
-						grille[i][j] = new CaseActive(SommeX, SommeY);
+						grille[i][j] = new Case(SommeX, SommeY);
 				}
 
 			}
@@ -167,7 +167,7 @@ public class CreationGrille {
 	}
 
 	@SuppressWarnings("unused")
-	private void affichTab(CaseActive tab[][])
+	private void affichTab(Case tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)
