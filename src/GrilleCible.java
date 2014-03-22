@@ -1,44 +1,44 @@
 import java.util.Random;
 
+import javax.rmi.CORBA.Util;
+
 
 public class GrilleCible {
 
-	public int x = 6, y = 6;
-	public long seed = 42;		// Seed du tableau
-	public Case[][] grille = new Case[x][y];
-
-
+	/*
 	public static void main(String[] args){
 		new GrilleCible();
 	}
+	 */
+
+	public CaseCible[][] grille = new CaseCible[Utilitaires.x][Utilitaires.y];
 
 
 	public GrilleCible()
 	{
-		Random List = new Random(seed);
 
-		boolean[][] forme = formeGrille(x-1, y-1, List);
-		int[][] valeur = remplissageGrille(x, y, List, forme);
+		Random List = new Random(Utilitaires.seed);
+		boolean[][] forme = formeGrille(Utilitaires.x-1, Utilitaires.y-1, List);
+		int[][] valeur = remplissageGrille(Utilitaires.x, Utilitaires.y, List, forme);
 
 		for (int i = 0; i < valeur.length; i++)
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					grille[i][j] = new Case(valeur[i][j]);
+					this.grille[i][j] = new CaseCible(valeur[i][j]);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						grille[i][j] = new Case(SommeY, false);
+						this.grille[i][j] = new CaseCible(SommeY, false);
 					if (SommeY == 0)
-						grille[i][j] = new Case(SommeX, true);
+						this.grille[i][j] = new CaseCible(SommeX, true);
 					else
-						grille[i][j] = new Case(SommeX, SommeY);
+						this.grille[i][j] = new CaseCible(SommeX, SommeY);
 				}
 
 			}
-
 		affichTab(grille);
 	}
 
@@ -56,7 +56,7 @@ public class GrilleCible {
 		 * On va générer une suite de nombre qui seront convertis en coordonnées pour la poses de blocs
 		 * La même valeur peut retomber plusieurs fois
 		 */
-		for(int c = 0; c < x * y / 4 ; c++){		
+		for(int c = 0; c < x * y / 4 ; c++){
 			int val = List.nextInt((x-1)*(y-1));
 			int j = val % (y-1);
 			int i = val / (x-1);
@@ -89,17 +89,17 @@ public class GrilleCible {
 					boolean test = false;
 					while(!test){
 						boolean testI = true, testJ = true;
-						
+
 						int nb = List.nextInt(9) + 1;		// On prend une valeur de 1 à 9
-						
+
 						for(int ii=(i+1); ii>0 && tab[ii-1][j]; ii--)		// Test de la présence ou non du chiffre actuel sur la ligne
 							if(nb==grill[ii][j+1])
 								testI = false;
-						
+
 						for(int jj=(j+1); jj>0 && tab[i][jj-1]; jj--)		// Test de la présence ou non du chiffre actuel sur la colonne
 							if(nb==grill[i+1][jj])
 								testJ = false;
-						
+
 						if (testI && testJ){
 							test = true;		// Si les tests ont réussi, on place le chiffre actuel dans la case en cours
 							grill[i+1][j+1] = nb;
@@ -121,7 +121,7 @@ public class GrilleCible {
 	private int CalcSommeY(int tabSommes[][], int i, int j)
 	{
 		int somme = 0;
-		
+
 		// On effectue tant que on ne retombe pas sur un 0 ou que l'on est à la fin du tableau
 		for(int jj = (j+1); jj < tabSommes[i].length && tabSommes[i][jj] != 0 ; jj++)
 			somme += tabSommes[i][jj];
@@ -167,7 +167,7 @@ public class GrilleCible {
 	}
 
 	@SuppressWarnings("unused")
-	private void affichTab(Case tab[][])
+	private void affichTab(CaseCible tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)
