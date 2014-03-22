@@ -1,7 +1,5 @@
 import java.util.Random;
 
-import javax.rmi.CORBA.Util;
-
 
 public class GrilleCible {
 
@@ -12,6 +10,7 @@ public class GrilleCible {
 	 */
 
 	public CaseCible[][] grille = new CaseCible[Utilitaires.x][Utilitaires.y];
+	public boolean[][] grComparaison = new boolean[Utilitaires.x][Utilitaires.y];
 
 
 	public GrilleCible()
@@ -25,17 +24,17 @@ public class GrilleCible {
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					this.grille[i][j] = new CaseCible(valeur[i][j]);
+					grille[i][j] = new CaseCible(valeur[i][j]);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						this.grille[i][j] = new CaseCible(SommeY, false);
+						grille[i][j] = new CaseCible(SommeY, false);
 					if (SommeY == 0)
-						this.grille[i][j] = new CaseCible(SommeX, true);
+						grille[i][j] = new CaseCible(SommeX, true);
 					else
-						this.grille[i][j] = new CaseCible(SommeX, SommeY);
+						grille[i][j] = new CaseCible(SommeX, SommeY);
 				}
 
 			}
@@ -145,6 +144,14 @@ public class GrilleCible {
 	}
 
 
+	public void Comparaison(int n, int i, int j)
+	{
+		if (n == grille[i][j].n)
+			grComparaison[i][j] = true;
+		else
+			grComparaison[i][j] = false;
+		affichTab(grComparaison);
+	}
 
 	@SuppressWarnings("unused")
 	private void affichTab(int tab[][]){
@@ -157,7 +164,7 @@ public class GrilleCible {
 
 
 	@SuppressWarnings("unused")
-	private void affichTab(boolean tab[][])
+	private static void affichTab(boolean tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)

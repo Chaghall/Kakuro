@@ -1,4 +1,5 @@
 import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.*;
 import java.util.*;
 
@@ -45,7 +46,7 @@ public class Utilitaires implements Serializable
 			{
 				for(int cpt2 = 0; cpt < grille[cpt2].length ; cpt++)
 				{
-					bfw.write(grille[cpt][cpt2].getText());
+					bfw.write((grille[cpt][cpt2]).getText());
 				}
 			}
 			bfw.close();
@@ -60,7 +61,7 @@ public class Utilitaires implements Serializable
 	public void RepriseSave ()
 	{
 
-		fileDlg = new FileDialog(frame, "Sauvegarde à charger", FileDialog.LOAD);
+		fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
 	}
 
 
