@@ -3,6 +3,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.TextField;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -12,7 +18,6 @@ import javax.swing.JLabel;
 
 
 public class Kakuro {
-
 	private JFrame frame;
 	private GrilleCible grilleCible = new GrilleCible();
 	public Case[][] grille = new Case[Utilitaires.x][Utilitaires.y];
