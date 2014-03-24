@@ -1,5 +1,4 @@
-import java.awt.FileDialog;
-import java.awt.Frame;
+import java.awt.*;
 import java.io.*;
 import java.util.*;
 
@@ -7,8 +6,8 @@ import java.util.*;
 public class Utilitaires implements Serializable
 {
 
-	public static int x = 6;
-	public static int y = 6;
+	public static final int x = 6, y = 6;
+	public static int victoire = x*y , score;
 	public static long seed = 42;	// Seed du tableau
 	public Case[][] grille = new Case[x][y];
 	Random List = new Random(seed);

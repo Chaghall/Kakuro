@@ -5,15 +5,9 @@ import javax.swing.*;
 
 public class Case{
 
-	public int n;
-	public int sX;
-	public int sY;
+	public int n, sX, sY, juste;
 	private JTextField bloc = new JTextField();
 	private	JLabel block = new JLabel();
-	private boolean juste;
-
-	
-	
 	public Case(){
 
 	}
@@ -61,22 +55,32 @@ public class Case{
 	public void affichCase(JPanel pan) throws NumberFormatException{
 		if(this.n != 0)
 		{
-			this.juste = false;
 			pan.add(bloc);
+			bloc.setHorizontalAlignment(SwingConstants.CENTER);
 			bloc.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
-					if (Integer.parseInt(bloc.getText()) == n)
-						juste = true;
+					if (Integer.parseInt(bloc.getText()) == n){
+						Utilitaires.score -= juste;
+						juste = 1;
+						Utilitaires.score += juste;
+					}
+
 					else
-						juste = false;
-					Kakuro.Bouton1.setText(String.valueOf(juste));
+					{
+						Utilitaires.score -= juste;
+						juste = 0;
+						Utilitaires.score += juste;
+					}
+					Kakuro.Bouton1.setText(String.valueOf(Utilitaires.score));
 				}
 			});
 		}
 		else
 		{
-			this.juste = true;
+			Utilitaires.score -= juste;
+			juste = 1;
+			Utilitaires.score += juste;
 			if (sX != 0)
 				if (sY != 0)
 					block.setText(String.format("%2d\\%2d", sY, sX));
@@ -86,12 +90,19 @@ public class Case{
 				if (sY != 0)
 					block.setText(String.format("  \\%2d", sY));
 
-
+			block.setHorizontalAlignment(SwingConstants.CENTER);
 			pan.add(block);
 		}
 
 	}
-	
+
+	public void solution(){
+		bloc.setText(String.valueOf(n));
+		Utilitaires.score -= juste;
+		juste = 1;
+		Utilitaires.score += juste;
+	}
+
 	/**
 	 * Indique si la case est à remplir par l'utilisateur ou non.
 	 * @return true si la case est à remplir par l'utilisateur.
@@ -103,7 +114,7 @@ public class Case{
 		else
 			return false;
 	}
-	
+
 	/**
 	 * Retourne la valeur d'une case
 	 * @return
@@ -115,6 +126,16 @@ public class Case{
 		else
 			return null;
 	}
+
+	/**
+	 * Donne le texte à la case
+	 * @return
+	 */
+	public void setText(String s)
+	{
+		bloc.setText(s);
+	}
+
 
 	public String toString()
 	{
@@ -131,6 +152,11 @@ public class Case{
 					return String.format("  \\%2d", sY);
 				else
 					return String.format("  \\  ");
+	}
+
+
+	public void disable() {
+		bloc.setEditable(false);
 	}
 
 }

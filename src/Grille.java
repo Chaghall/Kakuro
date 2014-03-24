@@ -10,7 +10,7 @@ public class Grille {
 	 */
 
 	public Case[][] grille = new Case[Utilitaires.x][Utilitaires.y];
-	public boolean[][] grComparaison = new boolean[Utilitaires.x][Utilitaires.y];
+	public int cible;
 
 
 	public Grille()
@@ -144,15 +144,6 @@ public class Grille {
 	}
 
 
-	public void Comparaison(int n, int i, int j)
-	{
-		if (n == grille[i][j].n)
-			grComparaison[i][j] = true;
-		else
-			grComparaison[i][j] = false;
-		affichTab(grComparaison);
-	}
-
 	@SuppressWarnings("unused")
 	private void affichTab(int tab[][]){
 		for (int i=0;i<tab.length; i++){
@@ -163,6 +154,7 @@ public class Grille {
 	}
 
 
+	@SuppressWarnings("unused")
 	private static void affichTab(boolean tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
