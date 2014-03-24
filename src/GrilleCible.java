@@ -9,7 +9,7 @@ public class GrilleCible {
 	}
 	 */
 
-	public CaseCible[][] grille = new CaseCible[Utilitaires.x][Utilitaires.y];
+	public Case[][] grille = new Case[Utilitaires.x][Utilitaires.y];
 	public boolean[][] grComparaison = new boolean[Utilitaires.x][Utilitaires.y];
 
 
@@ -24,17 +24,17 @@ public class GrilleCible {
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					grille[i][j] = new CaseCible(valeur[i][j]);
+					grille[i][j] = new Case(valeur[i][j]);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						grille[i][j] = new CaseCible(SommeY, false);
+						grille[i][j] = new Case(SommeY, false);
 					if (SommeY == 0)
-						grille[i][j] = new CaseCible(SommeX, true);
+						grille[i][j] = new Case(SommeX, true);
 					else
-						grille[i][j] = new CaseCible(SommeX, SommeY);
+						grille[i][j] = new Case(SommeX, SommeY);
 				}
 
 			}
@@ -174,7 +174,7 @@ public class GrilleCible {
 	}
 
 	@SuppressWarnings("unused")
-	private void affichTab(CaseCible tab[][])
+	private void affichTab(Case tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)

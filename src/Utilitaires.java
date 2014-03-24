@@ -61,7 +61,7 @@ public class Utilitaires implements Serializable
 	public void RepriseSave ()
 	{
 
-		fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
+	//	fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
 	}
 
 
