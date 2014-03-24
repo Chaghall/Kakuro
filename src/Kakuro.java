@@ -3,14 +3,14 @@ import java.awt.*;
 
 
 public class Kakuro extends JFrame{
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
 	private JFrame Kakuro, Menu;
 	private JPanel contentPane;
 	
-	GrilleCible grilleCible = new GrilleCible();
-	public Case[][] grille = new Case[Utilitaires.x][Utilitaires.y];
+	private Grille grll = new Grille();
 	static JButton Bouton1;
 
 	/**
@@ -30,14 +30,9 @@ public class Kakuro extends JFrame{
 		getContentPane().add(ZoneJeu);
 		ZoneJeu.setLayout(new GridLayout(0, Utilitaires.y, 0, 0));
 
-		for(int i = 0; i < grilleCible.grille.length; i++)
-			for(int j = 0; j < grilleCible.grille[i].length; j++){
-
-				if (grilleCible.grille[i][j].n != 0 )
-					this.grille[i][j] = new Case(ZoneJeu, grilleCible.grille[i][j].n);
-				else
-					this.grille[i][j] = new Case(ZoneJeu, grilleCible.grille[i][j].sX, grilleCible.grille[i][j].sY);
-
+		for(int i = 0; i < grll.grille.length; i++)
+			for(int j = 0; j < grll.grille[i].length; j++){
+					grll.grille[i][j].affichCase(ZoneJeu);
 			}
 		
 		Bouton1 = new JButton("Un bouton");

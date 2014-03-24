@@ -10,9 +10,10 @@ public class Case{
 	public int sY;
 	private JTextField bloc = new JTextField();
 	private	JLabel block = new JLabel();
-	private int ValeurCible;
 	private boolean juste;
 
+	
+	
 	public Case(){
 
 	}
@@ -52,51 +53,68 @@ public class Case{
 	}
 
 
-	public Case(JPanel pan, int n) throws NumberFormatException{
-		this.ValeurCible = n;
-		this.juste = false;
-		pan.add(bloc);
-		bloc.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (Integer.parseInt(bloc.getText()) == ValeurCible)
-					juste = true;
-				else
-					juste = false;
-				Kakuro.Bouton1.setText(String.valueOf(juste));
-			}
-		});
-
-	}
-
-	public Case( JPanel pan, int sX, int sY) {
-		this.juste = true;
-		if (sX != 0)
-			if (sY != 0)
-				block.setText(String.format("%2d\\%2d", sY, sX));
-			else
-				block.setText(String.format("%2d\\  ", sX));
+	/**
+	 * Affiche les cases de la grille grâce à des JTextField pour les cases à remplir et des JLabel pour les indices de somme dans le JPanel pan
+	 * @param pan
+	 * @throws NumberFormatException
+	 */
+	public void affichCase(JPanel pan) throws NumberFormatException{
+		if(this.n != 0)
+		{
+			this.juste = false;
+			pan.add(bloc);
+			bloc.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (Integer.parseInt(bloc.getText()) == n)
+						juste = true;
+					else
+						juste = false;
+					Kakuro.Bouton1.setText(String.valueOf(juste));
+				}
+			});
+		}
 		else
-			if (sY != 0)
-				block.setText(String.format("  \\%2d", sY));
+		{
+			this.juste = true;
+			if (sX != 0)
+				if (sY != 0)
+					block.setText(String.format("%2d\\%2d", sY, sX));
+				else
+					block.setText(String.format("%2d\\  ", sX));
+			else
+				if (sY != 0)
+					block.setText(String.format("  \\%2d", sY));
 
 
-		pan.add(block);
+			pan.add(block);
+		}
+
 	}
-
-
-	public String getText() {
-		return bloc.getText();
+	
+	/**
+	 * Indique si la case est à remplir par l'utilisateur ou non.
+	 * @return true si la case est à remplir par l'utilisateur.
+	 */
+	public boolean aRemplir()
+	{
+		if (n != 0)
+			return true;
+		else
+			return false;
 	}
-
-	public void addKeyListener(Object object) {
-		bloc.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-		});
+	
+	/**
+	 * Retourne la valeur d'une case
+	 * @return
+	 */
+	public String getText()
+	{
+		if (n != 0)
+			return bloc.getText();
+		else
+			return null;
 	}
-
 
 	public String toString()
 	{

@@ -1,7 +1,7 @@
 import java.util.Random;
 
 
-public class GrilleCible {
+public class Grille {
 
 	/*
 	public static void main(String[] args){
@@ -13,7 +13,7 @@ public class GrilleCible {
 	public boolean[][] grComparaison = new boolean[Utilitaires.x][Utilitaires.y];
 
 
-	public GrilleCible()
+	public Grille()
 	{
 
 		Random List = new Random(Utilitaires.seed);
@@ -163,7 +163,6 @@ public class GrilleCible {
 	}
 
 
-	@SuppressWarnings("unused")
 	private static void affichTab(boolean tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
@@ -173,7 +172,7 @@ public class GrilleCible {
 		}
 	}
 
-	@SuppressWarnings("unused")
+	
 	private void affichTab(Case tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
