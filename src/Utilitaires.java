@@ -6,15 +6,24 @@ import java.util.*;
 public class Utilitaires implements Serializable
 {
 
-	public static final int x = 6, y = 6;
-	public static int victoire = x*y , score;
+	public static int x = 6;
+	public static int y = 6;
+	public int victoire = x*y , score;
 	public static long seed = 42;	// Seed du tableau
-	public Case[][] grille = new Case[x][y];
-	Random List = new Random(seed);
+	public static Case[][] grille ;
+	Random list;
 
 	private FileDialog fileDlg;
 	private String filePath;
+	public Utilitaires(int x1, int y1, int seed1)
+	{
+		x = x1;
+		y=y1;
+		seed = seed1;
+		grille = new Case[x][y];
+		list = new Random(seed);
 
+	}
 	/*
 	public static Vector Lire() throws IOException, ClassNotFoundException
 	{
@@ -32,21 +41,22 @@ public class Utilitaires implements Serializable
 }
 	 */
 
-	public static void  EcrireSave (int x, int y, int seed, Case[][] grille, Random List)
+	public static void  EcrireSave ()
 	{
 
 		try
 		{
-			String sauvegarde = "sauvegarde";
+			String sauvegarde = "sauvegarde.txt";
 			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(sauvegarde)));
 
-			bfw.write(x + y + seed);
+			bfw.write(""+ x + ";" + y + ";"+ seed + "\n\r");
 			for(int cpt= 0 ;cpt < grille.length  ; cpt++  )
 			{
 				for(int cpt2 = 0; cpt < grille[cpt2].length ; cpt++)
 				{
-					bfw.write((grille[cpt][cpt2]).getText());
+					bfw.write((grille[cpt][cpt2]).getText()+";");
 				}
+				bfw.write("\n\r");
 			}
 			bfw.close();
 		}
@@ -60,7 +70,7 @@ public class Utilitaires implements Serializable
 	public void RepriseSave ()
 	{
 
-	//	fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
+		//	fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
 	}
 
 
