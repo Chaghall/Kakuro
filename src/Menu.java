@@ -11,6 +11,7 @@ public class Menu {
 	
 	private JFrame frame;
 	private Kakuro Jeu;
+	private Aide help;
 	
 	/**
 	 * Launch the application.
@@ -34,6 +35,7 @@ public class Menu {
 	public Menu() {
 		initialize();
 		Jeu = new Kakuro(frame);
+		help = new Aide	(frame);
 	}
 
 	/**
@@ -54,5 +56,14 @@ public class Menu {
 		});
 		btnNewGame.setBounds(10, 11, 125, 23);
 		frame.getContentPane().add(btnNewGame);
+		
+		JButton btnAide = new JButton("Aide");
+		btnAide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				help.setVisible(true);
+			}
+		});
+		btnAide.setBounds(10, 45, 89, 23);
+		frame.getContentPane().add(btnAide);
 	}
 }
