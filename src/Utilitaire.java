@@ -3,19 +3,19 @@ import java.io.*;
 import java.util.*;
 
 
-public class Utilitaires implements Serializable
+public class Utilitaire implements Serializable
 {
 
 	public static int x = 6;
 	public static int y = 6;
 	public int victoire = x*y , score;
-	public static long seed = 42;	// Seed du tableau
+	public static long seed =  42;	// Seed du tableau
 	public static Case[][] grille ;
 	Random list;
 
 	private FileDialog fileDlg;
 	private String filePath;
-	public Utilitaires(int x1, int y1, int seed1)
+	public Utilitaire(int x1, int y1, int seed1)
 	{
 		x = x1;
 		y=y1;
@@ -41,28 +41,34 @@ public class Utilitaires implements Serializable
 }
 	 */
 
-	public static void  EcrireSave ()
+	public static void  EcrireSave (String dir)
 	{
 
 		try
 		{
-			String sauvegarde = "sauvegarde.txt";
-			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(sauvegarde)));
-
-			bfw.write(""+ x + ";" + y + ";"+ seed + "\n\r");
+			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(dir + ".txt")));
+			bfw.write("connard\r\n");
+			bfw.write(""+ x + ";" + y + ";"+ seed + "\r\n");
+			System.out.println("Param de base fini");
+			System.out.println("entre dans la boucle");
 			for(int cpt= 0 ;cpt < grille.length  ; cpt++  )
 			{
+				System.out.println("entre dans la seconde boucle");
 				for(int cpt2 = 0; cpt < grille[cpt2].length ; cpt++)
 				{
-					bfw.write((grille[cpt][cpt2]).getText()+";");
+					
+//					bfw.write(grille[cpt][cpt2].getText()+";");
+					bfw.write("Pizza au curry");
+					System.out.println("ecrit");
 				}
-				bfw.write("\n\r");
+				System.out.println("sort de  la seconde boucle");
+				bfw.write("\r\n");
 			}
 			bfw.close();
 		}
 		catch (IOException e1)
 		{
-			e1.printStackTrace();
+			System.out.println("salope");
 		}
 
 	}

@@ -9,32 +9,33 @@ public class Grille {
 	}
 	 */
 
-	public Case[][] grille = new Case[Utilitaires.x][Utilitaires.y];
+	public Case[][] grille ;
 	public int cible;
 
 
-	public Grille()
+	public Grille(Utilitaire util1)
 	{
-
-		Random List = new Random(Utilitaires.seed);
-		boolean[][] forme = formeGrille(Utilitaires.x-1, Utilitaires.y-1, List);
-		int[][] valeur = remplissageGrille(Utilitaires.x, Utilitaires.y, List, forme);
+		
+		grille = new Case[util1.x][util1.y];
+		Random List = new Random(util1.seed);
+		boolean[][] forme = formeGrille(util1.x-1, util1.y-1, List);
+		int[][] valeur = remplissageGrille(util1.x, util1.y, List, forme);
 
 		for (int i = 0; i < valeur.length; i++)
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					grille[i][j] = new Case(valeur[i][j]);
+					grille[i][j] = new Case(valeur[i][j], util1);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						grille[i][j] = new Case(SommeY, false);
+						grille[i][j] = new Case(SommeY, false, util1);
 					if (SommeY == 0)
-						grille[i][j] = new Case(SommeX, true);
+						grille[i][j] = new Case(SommeX, true, util1);
 					else
-						grille[i][j] = new Case(SommeX, SommeY);
+						grille[i][j] = new Case(SommeX, SommeY, util1);
 				}
 
 			}

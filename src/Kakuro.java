@@ -17,9 +17,9 @@ public class Kakuro extends JFrame{
 	private JFrame Kakuro, Menu, Result;
 	private JPanel contentPane;
 	private JInternalFrame result;
+	Utilitaire smts;
 
-
-	private Grille grll = new Grille();
+	private Grille grll ;
 	static JButton Bouton1;
 
 //	FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
@@ -30,6 +30,8 @@ public class Kakuro extends JFrame{
 
 		//Menu = frame;
 		//Kakuro = this;
+		smts = new Utilitaire(6, 6 , 42);
+		grll = new Grille(smts);
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -37,7 +39,7 @@ public class Kakuro extends JFrame{
 		JPanel ZoneJeu = new JPanel();
 		ZoneJeu.setBounds(0, 0, 287, 262);
 		getContentPane().add(ZoneJeu);
-		ZoneJeu.setLayout(new GridLayout(0, Utilitaires.y, 0, 0));
+		ZoneJeu.setLayout(new GridLayout(0, Utilitaire.y, 0, 0));
 
 		for(int i = 0; i < grll.grille.length; i++)
 			for(int j = 0; j < grll.grille[i].length; j++)
@@ -59,15 +61,15 @@ public class Kakuro extends JFrame{
 		JButton btnVerif = new JButton("V\u00E9rification");
 		btnVerif.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Utilitaires.score < Utilitaires.victoire)
+				if (smts.score < smts.victoire)
 				{
-					Result = new Result(Kakuro, false);
+					Result = new Result(Kakuro, false, smts);
 					Result.setVisible(true);
 				}
 				else
 				{
 					finJeu();
-					Result = new Result(Kakuro, true);
+					Result = new Result(Kakuro, true, smts);
 					Result.setVisible(true);
 				}
 
@@ -83,9 +85,16 @@ public class Kakuro extends JFrame{
 			public void mouseClicked(MouseEvent arg0) {
 				
 				openDialog.setVisible(true);
-				String dir = openDialog.getDirectory();
-				Utilitaires save = new Utilitaires();
-				save.EcrireSave(x, y, seed, grll, List);
+				try
+				{
+				String dir = openDialog.getDirectory()+openDialog.getFile();
+				
+				smts.EcrireSave(dir);
+				}
+				catch(NullPointerException point)
+				{
+					
+				}
 				
 			}
 		});
@@ -103,7 +112,14 @@ public class Kakuro extends JFrame{
 
 
 				openDialog2.setVisible(true);
+				try
+				{
 				String dir = openDialog2.getDirectory();
+				}
+				catch(NullPointerException point)
+				{
+					
+				}
 				
 				
 
