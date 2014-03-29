@@ -18,9 +18,8 @@ public class Utilitaire implements Serializable
 	public Utilitaire(int x1, int y1, int seed1)
 	{
 		x = x1;
-		y=y1;
+		y = y1;
 		seed = seed1;
-		grille = new Case[x][y];
 		list = new Random(seed);
 
 	}
@@ -47,28 +46,25 @@ public class Utilitaire implements Serializable
 		try
 		{
 			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(dir + ".txt")));
-			bfw.write("connard\r\n");
 			bfw.write(""+ x + ";" + y + ";"+ seed + "\r\n");
 			System.out.println("Param de base fini");
-			System.out.println("entre dans la boucle");
 			for(int cpt= 0 ;cpt < grille.length  ; cpt++  )
 			{
-				System.out.println("entre dans la seconde boucle");
-				for(int cpt2 = 0; cpt < grille[cpt2].length ; cpt++)
+				for(int cpt2 = 0; cpt2 < grille[cpt].length ; cpt2++)
 				{
-					
-//					bfw.write(grille[cpt][cpt2].getText()+";");
-					bfw.write("Pizza au curry");
-					System.out.println("ecrit");
+					if (grille[cpt][cpt2].aRemplir()){
+						bfw.write(grille[cpt][cpt2].getText()+";");
+						System.out.print(grille[cpt][cpt2].getText()+";");
+					}
 				}
-				System.out.println("sort de  la seconde boucle");
 				bfw.write("\r\n");
+				System.out.println();
 			}
 			bfw.close();
 		}
 		catch (IOException e1)
 		{
-			System.out.println("salope");
+			
 		}
 
 	}

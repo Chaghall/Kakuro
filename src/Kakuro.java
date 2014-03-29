@@ -22,7 +22,7 @@ public class Kakuro extends JFrame{
 	private Grille grll ;
 	static JButton Bouton1;
 
-//	FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
+	//	FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
 	/**
 	 * Create the application.
 	 */
@@ -40,14 +40,10 @@ public class Kakuro extends JFrame{
 		ZoneJeu.setBounds(0, 0, 287, 262);
 		getContentPane().add(ZoneJeu);
 		ZoneJeu.setLayout(new GridLayout(0, Utilitaire.y, 0, 0));
-
+		
 		for(int i = 0; i < grll.grille.length; i++)
 			for(int j = 0; j < grll.grille[i].length; j++)
 				grll.grille[i][j].affichCase(ZoneJeu);
-
-		Bouton1 = new JButton("Un bouton");
-		Bouton1.setBounds(297, 11, 127, 41);
-		getContentPane().add(Bouton1);
 
 		JButton btnSol = new JButton("Solution");
 		btnSol.addActionListener(new ActionListener() {
@@ -55,7 +51,7 @@ public class Kakuro extends JFrame{
 				finJeu();
 			}
 		});
-		btnSol.setBounds(297, 63, 127, 41);
+		btnSol.setBounds(297, 79, 127, 41);
 		getContentPane().add(btnSol);
 
 		JButton btnVerif = new JButton("V\u00E9rification");
@@ -75,57 +71,46 @@ public class Kakuro extends JFrame{
 
 			}
 		});
-		btnVerif.setBounds(297, 115, 127, 41);
+		btnVerif.setBounds(297, 19, 127, 41);
 		getContentPane().add(btnVerif);
 
 		JButton btnSauvegarder = new JButton("Sauvegarder");
 		final FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.SAVE);
-		btnSauvegarder.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
+		btnSauvegarder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				openDialog.setVisible(true);
-				try
-				{
-				String dir = openDialog.getDirectory()+openDialog.getFile();
-				
-				smts.EcrireSave(dir);
+				try{
+					String dir = openDialog.getDirectory()+openDialog.getFile();
+					smts.EcrireSave(dir);
 				}
 				catch(NullPointerException point)
 				{
-					
+
 				}
-				
 			}
 		});
-		btnSauvegarder.setBounds(307, 167, 106, 23);
+		btnSauvegarder.setBounds(297, 139, 127, 41);
 		getContentPane().add(btnSauvegarder);
 
 		JButton btnCharger = new JButton("Charger");
 		final FileDialog openDialog2 = new FileDialog(this, "Open File", FileDialog.LOAD);
-				 
-		btnCharger.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
 
-				
-
+		btnCharger.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
 				openDialog2.setVisible(true);
 				try
 				{
-				String dir = openDialog2.getDirectory();
+					String dir = openDialog2.getDirectory();
 				}
 				catch(NullPointerException point)
 				{
-					
+
 				}
-				
-				
 
 			}
 		});
-		btnCharger.setBounds(317, 208, 89, 23);
+		btnCharger.setBounds(297, 199, 127, 41);
 		getContentPane().add(btnCharger);
 
 	}

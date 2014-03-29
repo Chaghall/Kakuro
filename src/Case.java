@@ -1,15 +1,17 @@
 import java.awt.event.*;
+import java.text.ParseException;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 
 
 public class Case{
 
 	public int n, sX, sY, juste;
-	private JTextField bloc = new JTextField();
+	private JFormattedTextField bloc = new JFormattedTextField();;
 	private	JLabel block = new JLabel();
 	Utilitaire utilGeneral;
-	
+
 	public Case(Utilitaire util1){
 		utilGeneral = util1;
 	}
@@ -60,24 +62,36 @@ public class Case{
 	public void affichCase(JPanel pan) throws NumberFormatException{
 		if(this.n != 0)
 		{
+			bloc.setValue(null);
+			try{
+				MaskFormatter format = new MaskFormatter("#");
+				bloc = new JFormattedTextField(format);
+			}
+			catch(ParseException e2){
+
+			}
 			pan.add(bloc);
 			bloc.setHorizontalAlignment(SwingConstants.CENTER);
 			bloc.addKeyListener(new KeyAdapter() {
-				@Override
 				public void keyReleased(KeyEvent e) {
-					if (Integer.parseInt(bloc.getText()) == n){
-						utilGeneral.score -= juste;
-						juste = 1;
-						utilGeneral.score += juste;
-					}
+					try{
+						if (Integer.valueOf(bloc.getText()) == n){
+							utilGeneral.score -= juste;
+							juste = 1;
+							utilGeneral.score += juste;
+						}
 
-					else
-					{
-						utilGeneral.score -= juste;
-						juste = 0;
-						utilGeneral.score += juste;
+						else
+						{
+							utilGeneral.score -= juste;
+							juste = 0;
+							utilGeneral.score += juste;
+						}
 					}
-					Kakuro.Bouton1.setText(String.valueOf(utilGeneral.score));
+					catch(NumberFormatException e1)
+					{
+
+					}
 				}
 			});
 		}
@@ -122,12 +136,15 @@ public class Case{
 
 	/**
 	 * Retourne la valeur d'une case
-	 * @return
+	 * @return Renvoie la valeur d'une case à remplir par l'utilisateur. Si celle-ci est vide, la valeur renvoyée est 0.
 	 */
 	public String getText()
 	{
 		if (n != 0)
-			return bloc.getText();
+			if (bloc.getText() != null)
+				return bloc.getText();
+			else
+				return "0";
 		else
 			return null;
 	}

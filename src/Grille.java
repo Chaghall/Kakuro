@@ -40,6 +40,7 @@ public class Grille {
 
 			}
 		affichTab(grille);
+		Utilitaire.grille = grille;
 	}
 
 
