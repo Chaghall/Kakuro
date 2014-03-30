@@ -46,8 +46,8 @@ public class Utilitaire implements Serializable
 		try
 		{
 			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(dir + ".txt")));
+			System.out.println("Début de la sauvegarde sur le fichier "+dir+".txt");
 			bfw.write(""+ x + ";" + y + ";"+ seed + "\r\n");
-			System.out.println("Param de base fini");
 			for(int cpt= 0 ;cpt < grille.length  ; cpt++  )
 			{
 				for(int cpt2 = 0; cpt2 < grille[cpt].length ; cpt2++)
@@ -58,9 +58,9 @@ public class Utilitaire implements Serializable
 					}
 				}
 				bfw.write("\r\n");
-				System.out.println();
 			}
 			bfw.close();
+			System.out.println("Sauvegarde réussie");
 		}
 		catch (IOException e1)
 		{
@@ -79,8 +79,6 @@ public class Utilitaire implements Serializable
 	public void LireSave ()
 	{
 
-		fileDlg.setVisible(true);
-		filePath = fileDlg.getDirectory() + fileDlg.getFile();
 		try
 		{
 			BufferedReader bfr = new BufferedReader(new FileReader(filePath));

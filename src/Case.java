@@ -8,7 +8,7 @@ import javax.swing.text.MaskFormatter;
 public class Case{
 
 	public int n, sX, sY, juste;
-	private JFormattedTextField bloc = new JFormattedTextField();;
+	private JFormattedTextField bloc = new JFormattedTextField();
 	private	JLabel block = new JLabel();
 	Utilitaire utilGeneral;
 

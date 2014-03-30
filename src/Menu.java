@@ -1,17 +1,21 @@
 import java.awt.EventQueue;
+import java.awt.FileDialog;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Menu {
+public class Menu extends JFrame{
 	
 	
 	private JFrame frame;
 	private Kakuro Jeu;
 	private Aide help;
+	private Param config;
+	public Utilitaire smts;
 	
 	/**
 	 * Launch the application.
@@ -34,14 +38,15 @@ public class Menu {
 	 */
 	public Menu() {
 		initialize();
-		Jeu = new Kakuro(frame);
-		help = new Aide	(frame);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		config = new Param();
+		smts = config.util;				
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,20 +55,52 @@ public class Menu {
 		JButton btnNewGame = new JButton("Nouvelle Partie");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Jeu = new Kakuro(frame, smts);
 				Jeu.setVisible(true);
 				frame.setVisible(false);
 			}
 		});
-		btnNewGame.setBounds(10, 11, 125, 23);
+		btnNewGame.setBounds(297, 19, 127, 41);
 		frame.getContentPane().add(btnNewGame);
 		
 		JButton btnAide = new JButton("Aide");
 		btnAide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				help = new Aide	(frame);
 				help.setVisible(true);
 			}
 		});
-		btnAide.setBounds(10, 45, 89, 23);
+		btnAide.setBounds(297, 199, 127, 41);
 		frame.getContentPane().add(btnAide);
+		JButton btnCharger = new JButton("Charger");
+		final FileDialog openDialog2 = new FileDialog(this, "Open File", FileDialog.LOAD);
+
+		btnCharger.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				openDialog2.setVisible(true);
+				try
+				{
+					String dir = openDialog2.getDirectory();
+				}
+				catch(NullPointerException point)
+				{
+
+				}
+
+			}
+		});
+		btnCharger.setBounds(297, 79, 127, 41);
+		frame.getContentPane().add(btnCharger);
+		
+		JButton btnParam = new JButton("Param\u00E8tres");
+		btnParam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				config.setVisible(true);
+			}
+		});
+		btnParam.setBounds(297, 139, 127, 41);
+		frame.getContentPane().add(btnParam);
+
 	}
 }
