@@ -59,10 +59,10 @@ public class Grille {
 		 * On va générer une suite de nombre qui seront convertis en coordonnées pour la poses de blocs
 		 * La même valeur peut retomber plusieurs fois
 		 */
-		for(int c = 0; c < x * y / 4 ; c++){
-			int val = List.nextInt((x-1)*(y-1));
-			int j = val % (y-1);
-			int i = val % (x-1);
+		double val = List.nextInt((int)(Math.sqrt(x * y) - 4));
+		for(int c = 0; c < x * y / (val + 2) ; c++){
+			int j = List.nextInt(x*y) % (y-1);
+			int i = List.nextInt(x*y) % (x-1);
 
 			/*
 			 * On va maintenant poser un bloc de 2x2 sur la coordonnée en question

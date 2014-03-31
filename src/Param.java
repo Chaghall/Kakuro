@@ -42,7 +42,7 @@ public class Param extends JFrame {
 						new NumberFormatter(largeurFormat)));
 
 		JLabel lblTaille = new JLabel("Taille de la grille");
-		lblTaille.setBounds(10, 11, 75, 14);
+		lblTaille.setBounds(10, 11, 134, 14);
 		contentPane.add(lblTaille);
 
 		JLabel lblLargeur = new JLabel("Largeur :");
@@ -53,19 +53,19 @@ public class Param extends JFrame {
 		lblLongueur.setBounds(20, 56, 65, 14);
 		contentPane.add(lblLongueur);
 
-		jftfLargeur.setText(String.valueOf(Utilitaire.x));
+		jftfLargeur.setText(String.valueOf(Utilitaire.y));
 		jftfLargeur.setBounds(95, 33, 49, 20);
 		contentPane.add(jftfLargeur);
 
-		jftfLongueur.setText(String.valueOf(Utilitaire.y));
+		jftfLongueur.setText(String.valueOf(Utilitaire.x));
 		jftfLongueur.setBounds(95, 53, 49, 20);
 		contentPane.add(jftfLongueur);
 
 		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Utilitaire.x = Integer.valueOf(jftfLargeur.getText());
-				Utilitaire.y = Integer.valueOf(jftfLongueur.getText());
+				Utilitaire.y = Integer.valueOf(jftfLargeur.getText());
+				Utilitaire.x = Integer.valueOf(jftfLongueur.getText());
 				Utilitaire.victoire = Utilitaire.y * Utilitaire.y;
 			}
 		});
