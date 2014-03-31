@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.*;
 import java.text.*;
 
@@ -12,9 +11,7 @@ public class Param extends JFrame {
 	private JPanel contentPane;
 
 	private JFormattedTextField jftfLargeur;
-	private JFormattedTextField jftfLongueur = new JFormattedTextField();
-
-	public Utilitaire util = new Utilitaire(6, 6 , 42);
+	private JFormattedTextField jftfLongueur;
 
 	private NumberFormat largeurFormat;
 	private NumberFormat longueurFormat;
@@ -23,6 +20,7 @@ public class Param extends JFrame {
 	public Param() {
 
 		paramFormat();
+		new Utilitaire(12, 6, 42);
 
 		setTitle("Param\u00E8tres");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -55,25 +53,26 @@ public class Param extends JFrame {
 		lblLongueur.setBounds(20, 56, 65, 14);
 		contentPane.add(lblLongueur);
 
-		jftfLargeur.setText(String.valueOf(util.x));
+		jftfLargeur.setText(String.valueOf(Utilitaire.x));
 		jftfLargeur.setBounds(95, 33, 49, 20);
 		contentPane.add(jftfLargeur);
 
-		jftfLongueur.setText(String.valueOf(util.y));
+		jftfLongueur.setText(String.valueOf(Utilitaire.y));
 		jftfLongueur.setBounds(95, 53, 49, 20);
 		contentPane.add(jftfLongueur);
 
 		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				util.x = Integer.valueOf(jftfLargeur.getText());
-				util.y = Integer.valueOf(jftfLongueur.getText());
+				Utilitaire.x = Integer.valueOf(jftfLargeur.getText());
+				Utilitaire.y = Integer.valueOf(jftfLongueur.getText());
+				Utilitaire.victoire = Utilitaire.y * Utilitaire.y;
 			}
 		});
 		btnValider.setBounds(30, 81, 89, 23);
 		contentPane.add(btnValider);
 	}
-	
+
 	// Déclare les formats des champs de taille de la grille
 	private void paramFormat() {
 		longueurFormat = NumberFormat.getNumberInstance();

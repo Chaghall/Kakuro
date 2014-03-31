@@ -8,8 +8,8 @@ public class Utilitaire implements Serializable
 
 	public static int x = 6;
 	public static int y = 6;
-	public int victoire = x*y , score;
-	public static long seed =  42;	// Seed du tableau
+	public static int victoire, score;
+	public static long seed;	// Seed du tableau
 	public static Case[][] grille ;
 	Random list;
 
@@ -21,6 +21,7 @@ public class Utilitaire implements Serializable
 		y = y1;
 		seed = seed1;
 		list = new Random(seed);
+		victoire = x*y;
 
 	}
 	/*

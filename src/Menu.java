@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 public class Menu extends JFrame{
 	
 	
-	private JFrame frame;
+	private JFrame frmKakuroMenu;
 	private Kakuro Jeu;
 	private Aide help;
 	private Param config;
@@ -25,7 +25,7 @@ public class Menu extends JFrame{
 			public void run() {
 				try {
 					Menu window = new Menu();
-					window.frame.setVisible(true);
+					window.frmKakuroMenu.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,33 +45,33 @@ public class Menu extends JFrame{
 	 */
 	private void initialize() {
 
-		config = new Param();
-		smts = config.util;				
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		config = new Param();			
+		frmKakuroMenu = new JFrame();
+		frmKakuroMenu.setTitle("Kakuro - Menu");
+		frmKakuroMenu.setBounds(100, 100, 450, 300);
+		frmKakuroMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmKakuroMenu.getContentPane().setLayout(null);
 		
 		JButton btnNewGame = new JButton("Nouvelle Partie");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Jeu = new Kakuro(frame, smts);
+				Jeu = new Kakuro(frmKakuroMenu, smts);
 				Jeu.setVisible(true);
-				frame.setVisible(false);
+				frmKakuroMenu.setVisible(false);
 			}
 		});
 		btnNewGame.setBounds(297, 19, 127, 41);
-		frame.getContentPane().add(btnNewGame);
+		frmKakuroMenu.getContentPane().add(btnNewGame);
 		
 		JButton btnAide = new JButton("Aide");
 		btnAide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				help = new Aide	(frame);
+				help = new Aide	(frmKakuroMenu);
 				help.setVisible(true);
 			}
 		});
 		btnAide.setBounds(297, 199, 127, 41);
-		frame.getContentPane().add(btnAide);
+		frmKakuroMenu.getContentPane().add(btnAide);
 		JButton btnCharger = new JButton("Charger");
 		final FileDialog openDialog2 = new FileDialog(this, "Open File", FileDialog.LOAD);
 
@@ -91,7 +91,7 @@ public class Menu extends JFrame{
 			}
 		});
 		btnCharger.setBounds(297, 79, 127, 41);
-		frame.getContentPane().add(btnCharger);
+		frmKakuroMenu.getContentPane().add(btnCharger);
 		
 		JButton btnParam = new JButton("Param\u00E8tres");
 		btnParam.addActionListener(new ActionListener() {
@@ -100,7 +100,7 @@ public class Menu extends JFrame{
 			}
 		});
 		btnParam.setBounds(297, 139, 127, 41);
-		frame.getContentPane().add(btnParam);
+		frmKakuroMenu.getContentPane().add(btnParam);
 
 	}
 }

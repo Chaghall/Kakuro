@@ -13,29 +13,30 @@ public class Grille {
 	public int cible;
 
 
-	public Grille(Utilitaire util1)
+	public Grille()
 	{
 		
-		grille = new Case[util1.x][util1.y];
-		Random List = new Random(util1.seed);
-		boolean[][] forme = formeGrille(util1.x-1, util1.y-1, List);
-		int[][] valeur = remplissageGrille(util1.x, util1.y, List, forme);
+		grille = new Case[Utilitaire.x][Utilitaire.y];
+		Random List = new Random(Utilitaire.seed);
+		boolean[][] forme = formeGrille(Utilitaire.x-1, Utilitaire.y-1, List);
+		int[][] valeur = remplissageValGrille(Utilitaire.x, Utilitaire.y, List, forme);
+		
 
 		for (int i = 0; i < valeur.length; i++)
 			for (int j = 0; j < valeur[i].length; j++)
 			{
 				if (valeur[i][j] != 0)
-					grille[i][j] = new Case(valeur[i][j], util1);
+					grille[i][j] = new Case(valeur[i][j]);
 				if (valeur[i][j] == 0){
 					int SommeX = CalcSommeX(valeur, i, j);
 					int SommeY = CalcSommeY(valeur, i, j);
 
 					if (SommeX == 0)
-						grille[i][j] = new Case(SommeY, false, util1);
+						grille[i][j] = new Case(SommeY, false);
 					if (SommeY == 0)
-						grille[i][j] = new Case(SommeX, true, util1);
+						grille[i][j] = new Case(SommeX, true);
 					else
-						grille[i][j] = new Case(SommeX, SommeY, util1);
+						grille[i][j] = new Case(SommeX, SommeY);
 				}
 
 			}
@@ -46,6 +47,7 @@ public class Grille {
 
 	/**
 	 * Génération d'un tableau de forme de grille par pose de blocs de 2x2
+	 * Cette fonction ne prévient pas la création de lignes de plus de 9 cases, ce qui peut être problèmatique.
 	 * @param x
 	 * @param y
 	 * @param List
@@ -60,7 +62,7 @@ public class Grille {
 		for(int c = 0; c < x * y / 4 ; c++){
 			int val = List.nextInt((x-1)*(y-1));
 			int j = val % (y-1);
-			int i = val / (x-1);
+			int i = val % (x-1);
 
 			/*
 			 * On va maintenant poser un bloc de 2x2 sur la coordonnée en question
@@ -69,6 +71,7 @@ public class Grille {
 				for(int j1 = 0; j1 < 2; j1++)
 					frmGrill[i1+i][j1+j] = true;
 		}
+		//affichTab(frmGrill);
 		return frmGrill;
 	}
 
@@ -80,7 +83,7 @@ public class Grille {
 	 * @param tab
 	 * @return
 	 */
-	private int[][] remplissageGrille(int x, int y, Random List, boolean[][] tab) {
+	private int[][] remplissageValGrille(int x, int y, Random List, boolean[][] tab) {
 
 		int grill[][] = new int[x][y];		// Tableau de valeur sans bordures
 
@@ -88,11 +91,13 @@ public class Grille {
 			for(int j = 0 ; j < tab[i].length; j++)
 				if (tab[i][j]){
 					boolean test = false;
+					int k = 0;
 					while(!test){
 						boolean testI = true, testJ = true;
 
 						int nb = List.nextInt(9) + 1;		// On prend une valeur de 1 à 9
-
+						k +=1;
+						
 						for(int ii=(i+1); ii>0 && tab[ii-1][j]; ii--)		// Test de la présence ou non du chiffre actuel sur la ligne
 							if(nb==grill[ii][j+1])
 								testI = false;
@@ -103,11 +108,18 @@ public class Grille {
 
 						if (testI && testJ){
 							test = true;		// Si les tests ont réussi, on place le chiffre actuel dans la case en cours
-							grill[i+1][j+1] = nb;
+							grill[i+1][j+1] = nb;							
 						}						// Autrement, on recommence en prenant une autre valeur
+						
+						
+						if (k >= 81){		// Test d'une valeur qui permet de sortir de la boucle au dessus.
+							test = true;
+							grill[i+1][j+1] = 0;
+						}
+						
 					}
 				}				
-
+		//affichTab(grill);
 		return grill;
 	}	
 

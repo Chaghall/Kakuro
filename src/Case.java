@@ -10,21 +10,21 @@ public class Case{
 	public int n, sX, sY, juste;
 	private JFormattedTextField bloc = new JFormattedTextField();
 	private	JLabel block = new JLabel();
-	Utilitaire utilGeneral;
 
+	/*
 	public Case(Utilitaire util1){
 		utilGeneral = util1;
 	}
+	*/
 
 
 	/**
 	 * 
 	 * @param n valeur d'une case
 	 */
-	public Case(int n, Utilitaire util1)
+	public Case(int n)
 	{
 		this.n = n;
-		utilGeneral = util1;
 	}
 
 	/**
@@ -32,9 +32,8 @@ public class Case{
 	 * @param S indice de Somme
 	 * @param or orientation de l'indice de Somme, s'il est vrai, c'est un indice en ligne, sinon, c'est un indice de colonne
 	 */
-	public Case(int S, boolean or, Utilitaire util1)
+	public Case(int S, boolean or)
 	{
-		utilGeneral = util1;
 		if(or)
 			this.sX = S;
 		else
@@ -46,11 +45,10 @@ public class Case{
 	 * @param sX indice de Somme horizontal
 	 * @param sY indice de Somme vertical
 	 */
-	public Case(int sX, int sY, Utilitaire util1)
+	public Case(int sX, int sY)
 	{
 		this.sX = sX;
 		this.sY = sY;
-		utilGeneral = util1;
 	}
 
 
@@ -76,16 +74,16 @@ public class Case{
 				public void keyReleased(KeyEvent e) {
 					try{
 						if (Integer.valueOf(bloc.getText()) == n){
-							utilGeneral.score -= juste;
+							Utilitaire.score -= juste;
 							juste = 1;
-							utilGeneral.score += juste;
+							Utilitaire.score += juste;
 						}
 
 						else
 						{
-							utilGeneral.score -= juste;
+							Utilitaire.score -= juste;
 							juste = 0;
-							utilGeneral.score += juste;
+							Utilitaire.score += juste;
 						}
 					}
 					catch(NumberFormatException e1)
@@ -97,12 +95,12 @@ public class Case{
 		}
 		else
 		{
-			utilGeneral.score -= juste;
+			Utilitaire.score -= juste;
 			juste = 1;
-			utilGeneral.score += juste;
+			Utilitaire.score += juste;
 			if (sX != 0)
 				if (sY != 0)
-					block.setText(String.format("%2d\\%2d", sY, sX));
+					block.setText(String.format("%2d\\%2d", sX, sY));
 				else
 					block.setText(String.format("%2d\\  ", sX));
 			else
@@ -117,9 +115,9 @@ public class Case{
 
 	public void solution(){
 		bloc.setText(String.valueOf(n));
-		utilGeneral.score -= juste;
+		Utilitaire.score -= juste;
 		juste = 1;
-		utilGeneral.score += juste;
+		Utilitaire.score += juste;
 	}
 
 	/**
@@ -166,7 +164,7 @@ public class Case{
 		else
 			if (sX != 0)
 				if (sY != 0)
-					return String.format("%2d\\%2d", sY, sX);
+					return String.format("%2d\\%2d", sX, sY);
 				else
 					return String.format("%2d\\  ", sX);
 			else

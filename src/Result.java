@@ -12,7 +12,7 @@ public class Result extends JFrame {
 
 	private JPanel contentPane;
 
-	public Result(JFrame frame, boolean victoire, Utilitaire util1) {
+	public Result(JFrame frame, boolean victoire) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 300, 150);
 		contentPane = new JPanel();
@@ -24,7 +24,7 @@ public class Result extends JFrame {
 		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblResult, BorderLayout.CENTER);
 		
-		int reste = util1.victoire - util1.score;
+		int reste = Utilitaire.victoire - Utilitaire.score;
 		if (victoire)
 			lblResult.setText("Bravo, vous avez réussi !");
 		else
