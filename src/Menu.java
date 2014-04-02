@@ -15,7 +15,6 @@ public class Menu extends JFrame{
 	private Kakuro Jeu;
 	private Aide help;
 	private Param config;
-	public Utilitaire smts;
 	
 	/**
 	 * Launch the application.
@@ -55,7 +54,7 @@ public class Menu extends JFrame{
 		JButton btnNewGame = new JButton("Nouvelle Partie");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Jeu = new Kakuro(frmKakuroMenu, smts);
+				Jeu = new Kakuro(frmKakuroMenu);
 				Jeu.setVisible(true);
 				frmKakuroMenu.setVisible(false);
 			}
@@ -81,7 +80,12 @@ public class Menu extends JFrame{
 				openDialog2.setVisible(true);
 				try
 				{
-					String dir = openDialog2.getDirectory();
+					String dir = openDialog2.getDirectory()+openDialog2.getFile();
+					System.out.println(dir);
+					Jeu = new Kakuro(frmKakuroMenu,dir);
+					Jeu.setVisible(true);
+					frmKakuroMenu.setVisible(false);
+					
 				}
 				catch(NullPointerException point)
 				{

@@ -14,19 +14,36 @@ public class Kakuro extends JFrame{
 	 */
 	private JFrame Kakuro, Menu, Result;
 
-	private Grille grll ;
 	static JButton Bouton1;
+	private JPanel ZoneJeu;
 
 	//	FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
 	/**
 	 * Create the application.
 	 */
-	public Kakuro(JFrame frame, Utilitaire utilMenu) {
-		setTitle("Kakuro - Jeu");
-
+	public Kakuro(JFrame frame) {
 		Menu = frame;
 		Kakuro = this;
-		grll = new Grille();
+		initialize();
+		new Grille();
+		affichGrille(Utilitaire.grille);
+	}
+	
+	
+	public Kakuro (JFrame frame, String dir){
+		Menu = frame;
+		Kakuro = this;
+		initialize();
+		Utilitaire.charge(dir);
+		affichGrille(Utilitaire.grille);
+		Utilitaire.repriseCharge(dir);
+	}
+	
+	/**
+	 * Affichage de l'IHM
+	 */
+	private void initialize() {
+		setTitle("Kakuro - Jeu");
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
@@ -39,13 +56,10 @@ public class Kakuro extends JFrame{
 				RowSpec.decode("fill:default:grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 
-		JPanel ZoneJeu = new JPanel();
+		ZoneJeu = new JPanel();
 		getContentPane().add(ZoneJeu, "2, 2, fill, fill");
 		ZoneJeu.setLayout(new GridLayout(Utilitaire.x, Utilitaire.y, 0, 0));
 
-		for(int i = 0; i < grll.grille.length; i++)
-			for(int j = 0; j < grll.grille[i].length; j++)
-				grll.grille[i][j].affichCase(ZoneJeu);
 		final FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.SAVE);
 
 		JPanel Boutons = new JPanel();
@@ -59,7 +73,7 @@ public class Kakuro extends JFrame{
 				openDialog.setVisible(true);
 				try{
 					String dir = openDialog.getDirectory()+openDialog.getFile();
-					Utilitaire.EcrireSave(dir);
+					Utilitaire.sauvegarde(dir);
 				}
 				catch(NullPointerException point)
 				{
@@ -105,12 +119,23 @@ public class Kakuro extends JFrame{
 
 	}
 
+
 	public void finJeu()
 	{
-		for(int i = 0; i < grll.grille.length; i++)
-			for(int j = 0; j < grll.grille[i].length; j++){
+		for(int i = 0; i < Utilitaire.grille.length; i++)
+			for(int j = 0; j < Utilitaire.grille[i].length; j++){
 				//grll.grille[i][j].disable();
-				grll.grille[i][j].solution();
+				Utilitaire.grille[i][j].solution();
 			}
+	}
+	/**
+	 * Affiche grille dans le label ZoneJeu
+	 * @param grille
+	 */
+	public void affichGrille(Case[][] grille)
+	{
+		for(int i = 0; i < grille.length; i++)
+			for(int j = 0; j < grille[i].length; j++)
+				grille[i][j].affichCase(ZoneJeu);
 	}
 }

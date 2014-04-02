@@ -1,20 +1,17 @@
-import java.awt.*;
 import java.io.*;
 import java.util.*;
 
 
-public class Utilitaire implements Serializable
+public class Utilitaire
 {
 
 	public static int x = 6;
 	public static int y = 6;
 	public static int victoire, score;
-	public static long seed;	// Seed du tableau
+	public static int seed;	// Seed du tableau
 	public static Case[][] grille ;
 	Random list;
 
-	private FileDialog fileDlg;
-	private String filePath;
 	public Utilitaire(int x1, int y1, int seed1)
 	{
 		x = x1;
@@ -24,26 +21,9 @@ public class Utilitaire implements Serializable
 		victoire = x*y;
 
 	}
-	/*
-	public static Vector Lire() throws IOException, ClassNotFoundException
+
+	public static void  sauvegarde (String dir)
 	{
-		ObjectInputStream ofR = new ObjectInputStream(new FileInputStream("seed.dat"));
-		return (Vector)ofR.readObject();
-	}
-
-	public static void Ecrire(Vector vector) throws IOException
-	{
-		ObjectOutputStream ofW = new ObjectOutputStream(new FileOutputStream("seed.dat"));
-		ofW.writeObject(vector);
-	}
-
-
-}
-	 */
-
-	public static void  EcrireSave (String dir)
-	{
-
 		try
 		{
 			BufferedWriter bfw = new BufferedWriter(new FileWriter(new File(dir + ".txt")));
@@ -53,10 +33,8 @@ public class Utilitaire implements Serializable
 			{
 				for(int cpt2 = 0; cpt2 < grille[cpt].length ; cpt2++)
 				{
-					if (grille[cpt][cpt2].aRemplir()){
 						bfw.write(grille[cpt][cpt2].getText()+";");
 						System.out.print(grille[cpt][cpt2].getText()+";");
-					}
 				}
 				bfw.write("\r\n");
 			}
@@ -65,28 +43,70 @@ public class Utilitaire implements Serializable
 		}
 		catch (IOException e1)
 		{
-			
+
 		}
 
 	}
 
-	public void RepriseSave ()
+
+	public static void charge (String filePath)
 	{
-
-		//	fileDlg = new FileDialog(Kakuro.frame, "Sauvegarde à charger", FileDialog.LOAD);
-	}
-
-
-	public void LireSave ()
-	{
-
-		try
-		{
-			BufferedReader bfr = new BufferedReader(new FileReader(filePath));
+		BufferedReader bfr;
+		try {
+			bfr = new BufferedReader(new FileReader(new File(filePath)));
+			try
+			{
+				String[] ligne = bfr.readLine().split(";");
+				for (int a = 0; a < ligne.length ; a++)
+					System.out.print(ligne[a] + " | ");
+				System.out.println();
+				x = Integer.parseInt(ligne[0]);
+				y = Integer.parseInt(ligne[1]);
+				seed = Integer.parseInt(ligne[2]);
+				new Grille();
+			}
+			catch (EOFException e)
+			{
+				bfr.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		catch (IOException e1)
+		catch (Exception e)
 		{
-			e1.printStackTrace();
+			e.printStackTrace();
+		}
+	}
+	public static void repriseCharge (String filePath)
+	{
+		BufferedReader bfr;
+		try {
+			bfr = new BufferedReader(new FileReader(new File(filePath)));
+			try
+			{
+				String[] ligne = bfr.readLine().split(";");
+				for(int i = 0; i < x; i++)
+				{
+					System.out.println();
+					ligne = bfr.readLine().split(";");
+					for (int a = 0; a < ligne.length ; a++)
+						System.out.print(ligne[a] + " | ");
+					for (int j = 0 ; j < ligne.length ; j++)
+						grille[i][j].setText(ligne[j]);
+				}
+
+			}
+			catch (EOFException e)
+			{
+				bfr.close();
+				System.out.println("Fin de fichier");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 

@@ -15,7 +15,7 @@ public class Case{
 	public Case(Utilitaire util1){
 		utilGeneral = util1;
 	}
-	*/
+	 */
 
 
 	/**
@@ -144,7 +144,7 @@ public class Case{
 			else
 				return "0";
 		else
-			return null;
+			return "";
 	}
 
 	/**
@@ -153,7 +153,8 @@ public class Case{
 	 */
 	public void setText(String s)
 	{
-		bloc.setText(s);
+		if (n != 0)
+			bloc.setText(s);
 	}
 
 
