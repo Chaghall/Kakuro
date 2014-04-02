@@ -1,16 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollBar;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import java.awt.Font;
-import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
-import javax.swing.UIManager;
+import javax.swing.*;
+import javax.swing.border.*;
 
 
 public class Aide extends JFrame {

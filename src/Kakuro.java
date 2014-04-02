@@ -2,7 +2,6 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
@@ -17,7 +16,6 @@ public class Kakuro extends JFrame{
 	static JButton Bouton1;
 	private JPanel ZoneJeu;
 
-	//	FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
 	/**
 	 * Create the application.
 	 */
