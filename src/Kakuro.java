@@ -18,6 +18,7 @@ public class Kakuro extends JFrame{
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.constructor
 	 */
 	public Kakuro(JFrame frame) {
 		Menu = frame;
@@ -33,6 +34,7 @@ public class Kakuro extends JFrame{
 		Kakuro = this;
 		initialize();
 		Utilitaire.charge(dir);
+		new Grille();
 		affichGrille(Utilitaire.grille);
 		Utilitaire.repriseCharge(dir);
 	}
@@ -47,6 +49,7 @@ public class Kakuro extends JFrame{
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("right:default"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
 			new RowSpec[] {
@@ -56,12 +59,12 @@ public class Kakuro extends JFrame{
 
 		ZoneJeu = new JPanel();
 		getContentPane().add(ZoneJeu, "2, 2, fill, fill");
-		ZoneJeu.setLayout(new GridLayout(Utilitaire.x, Utilitaire.y, 0, 0));
+		ZoneJeu.setLayout(new GridLayout(Utilitaire.x, Utilitaire.y, 1, 1));
 
 		final FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.SAVE);
 
 		JPanel Boutons = new JPanel();
-		getContentPane().add(Boutons, "3, 2, center, top");
+		getContentPane().add(Boutons, "4, 2, center, top");
 		Boutons.setLayout(new GridLayout(0, 1, 5, 20));
 
 		JButton btnSauvegarder = new JButton("Sauvegarder");

@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.text.*;
+import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,9 +19,13 @@ public class Param extends JFrame {
 
 
 	public Param() {
-
+		
+		Random list = new Random();
+		//int seed = list.nextInt();
+		int seed = 42;
+		
 		paramFormat();
-		new Utilitaire(12, 6, 42);
+		new Utilitaire(Utilitaire.x, Utilitaire.y, seed);
 
 		setTitle("Param\u00E8tres");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

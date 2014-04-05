@@ -17,13 +17,12 @@ import javax.swing.ImageIcon;
 
 
 public class Menu extends JFrame{
-	
-	
+
 	private JFrame frmKakuroMenu;
 	private Kakuro Jeu;
 	private Aide help;
 	private Param config;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +51,8 @@ public class Menu extends JFrame{
 	 */
 	private void initialize() {
 
-		config = new Param();			
+		config = new Param();
+
 		frmKakuroMenu = new JFrame();
 		frmKakuroMenu.setTitle("Kakuro - Menu");
 		frmKakuroMenu.setBounds(100, 100, 600, 300);
@@ -63,65 +63,25 @@ public class Menu extends JFrame{
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("right:default"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
-			new RowSpec[] {
+				new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("10px:grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
-		
+
 		JPanel panHeader = new JPanel();
 		frmKakuroMenu.getContentPane().add(panHeader, "2, 2, fill, center");
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Menu.class.getResource("/img/KakuroHeadertrans.png")));
+
+		JLabel lblNewLabel = new JLabel(new ImageIcon(Menu.class.getResource("/img/KakuroHeadertrans.png")));
 		panHeader.add(lblNewLabel);
+
 		final FileDialog openDialog2 = new FileDialog(this, "Open File", FileDialog.LOAD);
-		
+
 		JPanel panBouton = new JPanel();
 		frmKakuroMenu.getContentPane().add(panBouton, "4, 2, fill, top");
 		panBouton.setLayout(new GridLayout(0, 1, 0, 20));
-		
+
 		JButton btnNewGame = new JButton("Nouvelle Partie");
 		panBouton.add(btnNewGame);
-		
-		JButton btnAide = new JButton("Aide");
-		panBouton.add(btnAide);
-		JButton btnCharger = new JButton("Charger");
-		panBouton.add(btnCharger);
-		
-		JButton btnParam = new JButton("Param\u00E8tres");
-		panBouton.add(btnParam);
-		btnParam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				config.setVisible(true);
-			}
-		});
-		
-				btnCharger.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-		
-						openDialog2.setVisible(true);
-						try
-						{
-							String dir = openDialog2.getDirectory()+openDialog2.getFile();
-							System.out.println(dir);
-							Jeu = new Kakuro(frmKakuroMenu,dir);
-							Jeu.setVisible(true);
-							frmKakuroMenu.setVisible(false);
-							
-						}
-						catch(NullPointerException point)
-						{
-		
-						}
-		
-					}
-				});
-		btnAide.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				help = new Aide	(frmKakuroMenu);
-				help.setVisible(true);
-			}
-		});
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Jeu = new Kakuro(frmKakuroMenu);
@@ -130,5 +90,40 @@ public class Menu extends JFrame{
 			}
 		});
 
+		JButton btnAide = new JButton("Aide");
+		panBouton.add(btnAide);
+		btnAide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				help = new Aide	(frmKakuroMenu);
+				help.setVisible(true);
+			}
+		});
+
+		JButton btnCharger = new JButton("Charger");
+		panBouton.add(btnCharger);
+		btnCharger.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openDialog2.setVisible(true);
+				try	{
+					String dir = openDialog2.getDirectory()+openDialog2.getFile();
+					System.out.println(dir);
+					Jeu = new Kakuro(frmKakuroMenu,dir);
+					Jeu.setVisible(true);
+					frmKakuroMenu.setVisible(false);
+				}
+				catch(NullPointerException point)
+				{
+
+				}
+			}
+		});
+
+		JButton btnParam = new JButton("Param\u00E8tres");
+		panBouton.add(btnParam);
+		btnParam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				config.setVisible(true);
+			}
+		});
 	}
 }

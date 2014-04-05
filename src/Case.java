@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.*;
 import java.text.ParseException;
 
@@ -108,6 +109,10 @@ public class Case{
 					block.setText(String.format("  \\%2d", sY));
 
 			block.setHorizontalAlignment(SwingConstants.CENTER);
+			block.setBorder(null);
+			block.setOpaque(true);
+			block.setBackground(Color.BLACK);
+			block.setForeground(Color.WHITE);
 			pan.add(block);
 		}
 
@@ -144,7 +149,7 @@ public class Case{
 			else
 				return "0";
 		else
-			return "";
+			return null;
 	}
 
 	/**

@@ -33,10 +33,13 @@ public class Utilitaire
 			{
 				for(int cpt2 = 0; cpt2 < grille[cpt].length ; cpt2++)
 				{
+					if (grille[cpt][cpt2].aRemplir()){
 						bfw.write(grille[cpt][cpt2].getText()+";");
 						System.out.print(grille[cpt][cpt2].getText()+";");
+					}
 				}
 				bfw.write("\r\n");
+				System.out.println();
 			}
 			bfw.close();
 			System.out.println("Sauvegarde réussie");
@@ -56,6 +59,7 @@ public class Utilitaire
 			bfr = new BufferedReader(new FileReader(new File(filePath)));
 			try
 			{
+				System.out.println("Début du chargement");
 				String[] ligne = bfr.readLine().split(";");
 				for (int a = 0; a < ligne.length ; a++)
 					System.out.print(ligne[a] + " | ");
@@ -63,7 +67,7 @@ public class Utilitaire
 				x = Integer.parseInt(ligne[0]);
 				y = Integer.parseInt(ligne[1]);
 				seed = Integer.parseInt(ligne[2]);
-				new Grille();
+				System.out.println("Paramètres de la grille affectés avec succès.");
 			}
 			catch (EOFException e)
 			{
@@ -84,6 +88,7 @@ public class Utilitaire
 			bfr = new BufferedReader(new FileReader(new File(filePath)));
 			try
 			{
+				System.out.println("Seconde phase du chargement");
 				String[] ligne = bfr.readLine().split(";");
 				for(int i = 0; i < x; i++)
 				{
@@ -91,10 +96,13 @@ public class Utilitaire
 					ligne = bfr.readLine().split(";");
 					for (int a = 0; a < ligne.length ; a++)
 						System.out.print(ligne[a] + " | ");
-					for (int j = 0 ; j < ligne.length ; j++)
-						grille[i][j].setText(ligne[j]);
+					for (int j = 0 , j2 = 0; j < grille[i].length ; j++)
+						if (grille[i][j].aRemplir()){							
+							grille[i][j].setText(ligne[j2]);
+							j2++;
+						}
 				}
-
+				System.out.println("Chargement complété sans erreurs");
 			}
 			catch (EOFException e)
 			{
