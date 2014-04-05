@@ -59,10 +59,10 @@ public class Grille {
 		 * On va générer une suite de nombre qui seront convertis en coordonnées pour la poses de blocs
 		 * La même valeur peut retomber plusieurs fois
 		 */
-		double val = List.nextInt((int)(Math.sqrt(x * y)));
+		double val = List.nextInt(x*y/4);
 		for(int c = 0; c < x * y / (val + 2) ; c++){
-			int j = List.nextInt(x*y) % (y-1);
-			int i = List.nextInt(x*y) % (x-1);
+			int i = List.nextInt(frmGrill.length-1);
+			int j = List.nextInt(frmGrill[i].length-1);
 
 			/*
 			 * On va maintenant poser un bloc de 2x2 sur la coordonnée en question
@@ -71,7 +71,7 @@ public class Grille {
 				for(int j1 = 0; j1 < 2; j1++)
 					frmGrill[i1+i][j1+j] = true;
 		}
-		affichTab(frmGrill);
+		//affichTab(frmGrill);
 		return frmGrill;
 	}
 
@@ -119,7 +119,7 @@ public class Grille {
 						
 					}
 				}				
-		affichTab(grill);
+		//affichTab(grill);
 		return grill;
 	}	
 

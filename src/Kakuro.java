@@ -8,12 +8,12 @@ import com.jgoodies.forms.layout.*;
 
 
 public class Kakuro extends JFrame{
+	
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame Kakuro, Menu, Result;
-
-	static JButton Bouton1;
 	private JPanel ZoneJeu;
 
 	/**
@@ -27,8 +27,8 @@ public class Kakuro extends JFrame{
 		new Grille();
 		affichGrille(Utilitaire.grille);
 	}
-	
-	
+
+
 	public Kakuro (JFrame frame, String dir){
 		Menu = frame;
 		Kakuro = this;
@@ -38,7 +38,7 @@ public class Kakuro extends JFrame{
 		affichGrille(Utilitaire.grille);
 		Utilitaire.repriseCharge(dir);
 	}
-	
+
 	/**
 	 * Affichage de l'IHM
 	 */
@@ -63,28 +63,12 @@ public class Kakuro extends JFrame{
 
 		final FileDialog openDialog = new FileDialog(this, "Open File", FileDialog.SAVE);
 
-		JPanel Boutons = new JPanel();
-		getContentPane().add(Boutons, "4, 2, center, top");
-		Boutons.setLayout(new GridLayout(0, 1, 5, 20));
-
-		JButton btnSauvegarder = new JButton("Sauvegarder");
-		Boutons.add(btnSauvegarder);
-		btnSauvegarder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				openDialog.setVisible(true);
-				try{
-					String dir = openDialog.getDirectory()+openDialog.getFile();
-					Utilitaire.sauvegarde(dir);
-				}
-				catch(NullPointerException point)
-				{
-
-				}
-			}
-		});
+		JPanel panBouton = new JPanel();
+		getContentPane().add(panBouton, "4, 2, center, center");
+		panBouton.setLayout(new GridLayout(0, 1, 5, 20));
 
 		JButton btnVerif = new JButton("V\u00E9rification");
-		Boutons.add(btnVerif);
+		panBouton.add(btnVerif);
 		btnVerif.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Utilitaire.score < Utilitaire.victoire)
@@ -100,17 +84,33 @@ public class Kakuro extends JFrame{
 				}
 			}
 		});
-		
-				JButton btnSol = new JButton("Solution");
-				Boutons.add(btnSol);
-				btnSol.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						finJeu();
-					}
-				});
+
+		JButton btnSol = new JButton("Solution");
+		panBouton.add(btnSol);
+		btnSol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				finJeu();
+			}
+		});
+
+		JButton btnSauvegarder = new JButton("Sauvegarder");
+		panBouton.add(btnSauvegarder);
+		btnSauvegarder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openDialog.setVisible(true);
+				try{
+					String dir = openDialog.getDirectory()+openDialog.getFile();
+					Utilitaire.sauvegarde(dir);
+				}
+				catch(NullPointerException ex)
+				{
+					ex.printStackTrace();
+				}
+			}
+		});
 
 		JButton btnRetourAuMenu = new JButton("Retour au Menu");
-		Boutons.add(btnRetourAuMenu);
+		panBouton.add(btnRetourAuMenu);
 		btnRetourAuMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Menu.setVisible(true);
@@ -118,9 +118,21 @@ public class Kakuro extends JFrame{
 			}
 		});
 
+		JButton btnAide = new JButton("Aide");
+		panBouton.add(btnAide);
+		btnAide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Aide help = new Aide	();
+				help.setVisible(true);
+			}
+		});
+
 	}
 
-
+	/**
+	 * Fonction de fin de partie
+	 * Donne la bonne valeur à toute les cases et verrouille la grille
+	 */
 	public void finJeu()
 	{
 		for(int i = 0; i < Utilitaire.grille.length; i++)
@@ -129,6 +141,7 @@ public class Kakuro extends JFrame{
 				Utilitaire.grille[i][j].solution();
 			}
 	}
+	
 	/**
 	 * Affiche grille dans le label ZoneJeu
 	 * @param grille

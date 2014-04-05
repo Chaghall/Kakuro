@@ -6,21 +6,29 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPanel;
+
 import java.awt.GridLayout;
+import java.util.Random;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 
 public class Menu extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frmKakuroMenu;
 	private Kakuro Jeu;
-	private Aide help;
 	private Param config;
 
 	/**
@@ -84,6 +92,9 @@ public class Menu extends JFrame{
 		panBouton.add(btnNewGame);
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Random list = new Random();
+				int seed = list.nextInt();
+				new Utilitaire(Utilitaire.x, Utilitaire.y, seed);
 				Jeu = new Kakuro(frmKakuroMenu);
 				Jeu.setVisible(true);
 				frmKakuroMenu.setVisible(false);
@@ -94,7 +105,7 @@ public class Menu extends JFrame{
 		panBouton.add(btnAide);
 		btnAide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				help = new Aide	(frmKakuroMenu);
+				Aide help = new Aide	();
 				help.setVisible(true);
 			}
 		});
