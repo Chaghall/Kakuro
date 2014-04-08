@@ -15,6 +15,9 @@ public class Kakuro extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JFrame Kakuro, Menu, Result;
 	private JPanel ZoneJeu;
+	private JButton btnSauvegarder;
+	private JButton btnVerif;
+	private JButton btnSol;
 
 	/**
 	 * Create the application.
@@ -67,7 +70,7 @@ public class Kakuro extends JFrame{
 		getContentPane().add(panBouton, "4, 2, center, center");
 		panBouton.setLayout(new GridLayout(0, 1, 5, 20));
 
-		JButton btnVerif = new JButton("V\u00E9rification");
+		btnVerif = new JButton("V\u00E9rification");
 		panBouton.add(btnVerif);
 		btnVerif.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,15 +88,18 @@ public class Kakuro extends JFrame{
 			}
 		});
 
-		JButton btnSol = new JButton("Solution");
+		btnSol = new JButton("Solution");
 		panBouton.add(btnSol);
 		btnSol.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				finJeu();
+				btnSauvegarder.setEnabled(false);
+				btnVerif.setEnabled(false);
+				btnSol.setEnabled(false);
 			}
 		});
 
-		JButton btnSauvegarder = new JButton("Sauvegarder");
+		btnSauvegarder = new JButton("Sauvegarder");
 		panBouton.add(btnSauvegarder);
 		btnSauvegarder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,7 +143,7 @@ public class Kakuro extends JFrame{
 	{
 		for(int i = 0; i < Utilitaire.grille.length; i++)
 			for(int j = 0; j < Utilitaire.grille[i].length; j++){
-				//grll.grille[i][j].disable();
+				Utilitaire.grille[i][j].disable();
 				Utilitaire.grille[i][j].solution();
 			}
 	}
@@ -146,7 +152,7 @@ public class Kakuro extends JFrame{
 	 * Affiche grille dans le label ZoneJeu
 	 * @param grille
 	 */
-	public void affichGrille(Case[][] grille)
+	private void affichGrille(Case[][] grille)
 	{
 		for(int i = 0; i < grille.length; i++)
 			for(int j = 0; j < grille[i].length; j++)

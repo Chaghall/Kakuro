@@ -10,7 +10,6 @@ public class Grille {
 	 */
 
 	public Case[][] grille ;
-	public int cible;
 
 
 	public Grille()
@@ -59,8 +58,7 @@ public class Grille {
 		 * On va générer une suite de nombre qui seront convertis en coordonnées pour la poses de blocs
 		 * La même valeur peut retomber plusieurs fois
 		 */
-		double val = List.nextInt(x*y/4);
-		for(int c = 0; c < x * y / (val + 2) ; c++){
+		for(int c = 0; c < x * y / 4 ; c++){
 			int i = List.nextInt(frmGrill.length-1);
 			int j = List.nextInt(frmGrill[i].length-1);
 
@@ -169,7 +167,7 @@ public class Grille {
 
 
 	@SuppressWarnings("unused")
-	private static void affichTab(boolean tab[][])
+	private void affichTab(boolean tab[][])
 	{
 		for (int i=0;i<tab.length; i++){
 			for (int j=0; j<tab[i].length; j++)

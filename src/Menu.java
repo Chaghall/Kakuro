@@ -30,6 +30,7 @@ public class Menu extends JFrame{
 	private JFrame frmKakuroMenu;
 	private Kakuro Jeu;
 	private Param config;
+	private FileDialog openDialog;
 
 	/**
 	 * Launch the application.
@@ -61,6 +62,8 @@ public class Menu extends JFrame{
 
 		config = new Param();
 
+		openDialog = new FileDialog(this, "Open File", FileDialog.LOAD);
+
 		frmKakuroMenu = new JFrame();
 		frmKakuroMenu.setTitle("Kakuro - Menu");
 		frmKakuroMenu.setBounds(100, 100, 600, 300);
@@ -81,8 +84,6 @@ public class Menu extends JFrame{
 
 		JLabel lblNewLabel = new JLabel(new ImageIcon(Menu.class.getResource("/img/KakuroHeadertrans.png")));
 		panHeader.add(lblNewLabel);
-
-		final FileDialog openDialog2 = new FileDialog(this, "Open File", FileDialog.LOAD);
 
 		JPanel panBouton = new JPanel();
 		frmKakuroMenu.getContentPane().add(panBouton, "4, 2, fill, top");
@@ -114,9 +115,9 @@ public class Menu extends JFrame{
 		panBouton.add(btnCharger);
 		btnCharger.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				openDialog2.setVisible(true);
+				openDialog.setVisible(true);
 				try	{
-					String dir = openDialog2.getDirectory()+openDialog2.getFile();
+					String dir = openDialog.getDirectory()+openDialog.getFile();
 					System.out.println(dir);
 					Jeu = new Kakuro(frmKakuroMenu,dir);
 					Jeu.setVisible(true);
