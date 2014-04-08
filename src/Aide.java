@@ -26,7 +26,7 @@ public class Aide extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JTextPane txtpnHelp = new JTextPane();
+		JEditorPane txtpnHelp = new JEditorPane();
 		txtpnHelp.setEditable(false);
 
 		java.net.URL helpURL = Aide.class.getResource(
@@ -38,7 +38,7 @@ public class Aide extends JFrame {
 				System.err.println("Attempted to read a bad URL: " + helpURL);
 			}
 		} else {
-			System.err.println("Couldn't find file: TextSamplerDemoHelp.html");
+			System.err.println("Couldn't find file: "+ helpURL);
 		}
 
 		JScrollPane scrollPane = new JScrollPane(txtpnHelp);

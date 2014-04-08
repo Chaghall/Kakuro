@@ -154,7 +154,6 @@ public class Case{
 
 	/**
 	 * Donne le texte à la case
-	 * @return
 	 */
 	public void setText(String s)
 	{

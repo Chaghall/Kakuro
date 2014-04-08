@@ -8,20 +8,19 @@ import com.jgoodies.forms.layout.*;
 
 
 public class Kakuro extends JFrame{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JFrame Kakuro, Menu, Result;
 	private JPanel ZoneJeu;
-	private JButton btnSauvegarder;
-	private JButton btnVerif;
-	private JButton btnSol;
+	private JButton btnSauvegarder, btnVerif, btnSol, btnRetourAuMenu, btnAide;
+
 
 	/**
-	 * Create the application.
-	 * @wbp.parser.constructor
+	 * 
+	 * @param frame
 	 */
 	public Kakuro(JFrame frame) {
 		Menu = frame;
@@ -55,7 +54,7 @@ public class Kakuro extends JFrame{
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("right:default"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,},
-			new RowSpec[] {
+				new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("fill:default:grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
@@ -84,6 +83,9 @@ public class Kakuro extends JFrame{
 					finJeu();
 					Result = new Result(Kakuro, true);
 					Result.setVisible(true);
+					btnSauvegarder.setEnabled(false);
+					btnVerif.setEnabled(false);
+					btnSol.setEnabled(false);
 				}
 			}
 		});
@@ -115,7 +117,7 @@ public class Kakuro extends JFrame{
 			}
 		});
 
-		JButton btnRetourAuMenu = new JButton("Retour au Menu");
+		btnRetourAuMenu = new JButton("Retour au Menu");
 		panBouton.add(btnRetourAuMenu);
 		btnRetourAuMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -124,7 +126,7 @@ public class Kakuro extends JFrame{
 			}
 		});
 
-		JButton btnAide = new JButton("Aide");
+		btnAide = new JButton("Aide");
 		panBouton.add(btnAide);
 		btnAide.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -147,7 +149,7 @@ public class Kakuro extends JFrame{
 				Utilitaire.grille[i][j].solution();
 			}
 	}
-	
+
 	/**
 	 * Affiche grille dans le label ZoneJeu
 	 * @param grille

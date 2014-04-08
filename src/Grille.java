@@ -47,10 +47,10 @@ public class Grille {
 	/**
 	 * Génération d'un tableau de forme de grille par pose de blocs de 2x2
 	 * Cette fonction ne prévient pas la création de lignes de plus de 9 cases, ce qui peut être problèmatique.
-	 * @param x
-	 * @param y
-	 * @param List
-	 * @return
+	 * @param x Largeur de la grille
+	 * @param y Longueur de la grille
+	 * @param List Une Random List
+	 * @return Un tableau de booléens de forme de grille
 	 */
 	private boolean[][] formeGrille(int x, int y, Random List){
 		boolean frmGrill[][] = new boolean[x][y];
@@ -75,11 +75,10 @@ public class Grille {
 
 	/**
 	 * Génération d'un tableau de valeurs et ajout de bordures
-	 * @param x
-	 * @param y
-	 * @param seed
-	 * @param tab
-	 * @return
+	 * @param x Largeur de la grille
+	 * @param y Longueur de la grille
+	 * @param tab Un tableau de booléens de forme (générer par la fonction formeGrille(int x, int y, Random List)
+	 * @return Un tableau d'entiers qui remplie les cases du tableau de booléens tab
 	 */
 	private int[][] remplissageValGrille(int x, int y, Random List, boolean[][] tab) {
 
@@ -123,7 +122,6 @@ public class Grille {
 
 
 	/**
-	 * 
 	 * @param tabSommes
 	 * @param i
 	 * @param j
